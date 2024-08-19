@@ -8,23 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */; };
-		E96AA8622C73587A00EA1316 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8612C73587A00EA1316 /* HomeView.swift */; };
+		E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8612C73587A00EA1316 /* PharmacyView.swift */; };
 		E96AA8642C73587C00EA1316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96AA8632C73587C00EA1316 /* Assets.xcassets */; };
 		E96AA8672C73587C00EA1316 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96AA8662C73587C00EA1316 /* Preview Assets.xcassets */; };
-		E96AA8702C735BB200EA1316 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA86F2C735BB100EA1316 /* HomeViewModel.swift */; };
+		E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */; };
 		E96AA8732C735C4300EA1316 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8722C735C4300EA1316 /* Service.swift */; };
-		E96AA8762C735D1A00EA1316 /* Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8752C735D1A00EA1316 /* Pharmacy.swift */; };
+		E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8752C735D1A00EA1316 /* PharmacyModel.swift */; };
+		E96AA8782C73A29F00EA1316 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8772C73A29F00EA1316 /* EndPoint.swift */; };
+		E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8792C73B1E800EA1316 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E96AA85C2C73587A00EA1316 /* NobetciEczaneler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NobetciEczaneler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobetciEczanelerApp.swift; sourceTree = "<group>"; };
-		E96AA8612C73587A00EA1316 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E96AA8612C73587A00EA1316 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
 		E96AA8632C73587C00EA1316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E96AA8662C73587C00EA1316 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E96AA86F2C735BB100EA1316 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewModel.swift; sourceTree = "<group>"; };
 		E96AA8722C735C4300EA1316 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		E96AA8752C735D1A00EA1316 /* Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pharmacy.swift; sourceTree = "<group>"; };
+		E96AA8752C735D1A00EA1316 /* PharmacyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyModel.swift; sourceTree = "<group>"; };
+		E96AA8772C73A29F00EA1316 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		E96AA8792C73B1E800EA1316 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +80,9 @@
 		E96AA86D2C735B4C00EA1316 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				E96AA8742C735D0900EA1316 /* API */,
-				E96AA8612C73587A00EA1316 /* HomeView.swift */,
-				E96AA86F2C735BB100EA1316 /* HomeViewModel.swift */,
+				E96AA8752C735D1A00EA1316 /* PharmacyModel.swift */,
+				E96AA8612C73587A00EA1316 /* PharmacyView.swift */,
+				E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -96,16 +100,10 @@
 			isa = PBXGroup;
 			children = (
 				E96AA8722C735C4300EA1316 /* Service.swift */,
+				E96AA8772C73A29F00EA1316 /* EndPoint.swift */,
+				E96AA8792C73B1E800EA1316 /* NetworkError.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		E96AA8742C735D0900EA1316 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				E96AA8752C735D1A00EA1316 /* Pharmacy.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,10 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E96AA8622C73587A00EA1316 /* HomeView.swift in Sources */,
-				E96AA8762C735D1A00EA1316 /* Pharmacy.swift in Sources */,
+				E96AA8782C73A29F00EA1316 /* EndPoint.swift in Sources */,
+				E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */,
+				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
+				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
-				E96AA8702C735BB200EA1316 /* HomeViewModel.swift in Sources */,
+				E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */,
 				E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

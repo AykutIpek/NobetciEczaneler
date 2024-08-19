@@ -14,25 +14,40 @@ struct ServiceResponse<T: Decodable> {
 }
 
 final class Service {
-    static func request<T: Decodable>(urlString: String, headers: [String: String], responseType: T.Type) async -> ServiceResponse<T> {
-        guard let url = URL(string: urlString) else {
-            return ServiceResponse(data: nil, response: nil, error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+//    static func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async -> ServiceResponse<T> {
+//        guard let request = endpoint.urlRequest() else {
+//            return ServiceResponse(data: nil, response: nil, error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+//        }
+//        
+//        do {
+//            let (data, response) = try await URLSession.shared.data(for: request)
+//            let decodedData = try JSONDecoder().decode(T.self, from: data)
+//            return ServiceResponse(data: decodedData, response: response, error: nil)
+//        } catch {
+//            return ServiceResponse(data: nil, response: nil, error: error)
+//        }
+//    }
+    
+    static func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async -> Result<T, NetworkError> {
+        guard let request = endpoint.urlRequest() else {
+            return .failure(.invalidURL)
         }
-        
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            let jsonString = String(data: data, encoding: .utf8)
-            print("Received JSON: \(jsonString ?? "No Data")")
             
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
-            return ServiceResponse(data: decodedData, response: response, error: nil)
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                return .failure(.serverError(statusCode: httpResponse.statusCode))
+            }
+            
+            do {
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                return .success(decodedData)
+            } catch {
+                return .failure(.decodingFailed)
+            }
         } catch {
-            print("Decoding error: \(error.localizedDescription)")
-            return ServiceResponse(data: nil, response: nil, error: error)
+            return .failure(.custom(errorMessage: error.localizedDescription))
         }
     }
 }

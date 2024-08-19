@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  PharmacyView.swift
 //  NobetciEczaneler
 //
 //  Created by aykut ipek on 19.08.2024.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
+struct PharmacyView: View {
+    @StateObject private var viewModel = PharmacyViewModel()
     
     var body: some View {
         NavigationView {
@@ -35,12 +35,12 @@ struct HomeView: View {
             }
             .navigationTitle("Nöbetçi Eczaneler")
             .task {
-                await viewModel.loadPharmacies()
+                await viewModel.loadPharmacies(district: "seferihisar", province: "İzmir")
             }
         }
     }
 }
 
 #Preview {
-    HomeView()
+    PharmacyView()
 }
