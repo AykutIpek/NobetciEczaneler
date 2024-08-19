@@ -10,8 +10,6 @@ import Foundation
 enum Endpoint {
     case dutyPharmacy(district: String, province: String)
     case districtList
-    case kktcDutyPharmacy
-    case kktcCityList
     
     var baseURL: String {
         return "https://api.collectapi.com/health/"
@@ -23,10 +21,6 @@ enum Endpoint {
             return "dutyPharmacy"
         case .districtList:
             return "districtList"
-        case .kktcDutyPharmacy:
-            return "kktcDutyPharmacy"
-        case .kktcCityList:
-            return "kktcCityList"
         }
     }
     
@@ -50,7 +44,7 @@ enum Endpoint {
                 URLQueryItem(name: "ilce", value: district),
                 URLQueryItem(name: "il", value: province)
             ]
-        case .districtList, .kktcDutyPharmacy, .kktcCityList:
+        case .districtList:
             break
         }
         

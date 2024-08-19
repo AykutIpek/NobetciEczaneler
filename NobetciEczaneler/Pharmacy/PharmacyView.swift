@@ -26,6 +26,8 @@ struct PharmacyView: View {
                                 .font(.headline)
                             Text(pharmacy.address ?? "")
                                 .font(.subheadline)
+                            Text(pharmacy.dist ?? "")
+                                .font(.subheadline)
                             Text(pharmacy.phone ?? "")
                                 .font(.subheadline)
                         }
@@ -35,7 +37,7 @@ struct PharmacyView: View {
             }
             .navigationTitle("Nöbetçi Eczaneler")
             .task {
-                await viewModel.loadPharmacies(district: "seferihisar", province: "İzmir")
+                await viewModel.loadPharmacies(district: "", province: "İzmir")
             }
         }
     }
