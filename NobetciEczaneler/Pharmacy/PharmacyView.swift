@@ -11,7 +11,7 @@ struct PharmacyView: View {
     @StateObject private var viewModel = PharmacyViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 if viewModel.isLoading {
                     ProgressView("Loading...")
@@ -37,7 +37,7 @@ struct PharmacyView: View {
             }
             .navigationTitle("Nöbetçi Eczaneler")
             .task {
-                await viewModel.loadPharmacies(district: "", province: "İzmir")
+                await viewModel.loadPharmacies(district: "seferihisar", province: "İzmir")
             }
         }
     }

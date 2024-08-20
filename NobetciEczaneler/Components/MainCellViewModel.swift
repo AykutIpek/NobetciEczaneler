@@ -10,22 +10,22 @@ import SwiftUI
 
 struct MainCellViewModel {
     let systemImage: String
-    let cellTitle: String
+    let cellTitle: LocalizedStringKey
     let backgroundImage: ImageResource
     let color: [Color]
-    let action: (() -> Void)
+    let destinationView: AnyView
     
-    init(
+    init<V: View>(
         systemImage: String,
-        cellTitle: String,
+        cellTitle: LocalizedStringKey,
         backgroundImage: ImageResource,
         color: [Color],
-        action: @escaping () -> Void
+        destinationView: V? = nil
     ) {
         self.systemImage = systemImage
         self.cellTitle = cellTitle
         self.backgroundImage = backgroundImage
         self.color = color
-        self.action = action
+        self.destinationView = AnyView(destinationView)
     }
 }

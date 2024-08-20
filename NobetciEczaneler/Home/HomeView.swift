@@ -8,58 +8,72 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.red.opacity(0.6), Color.blue.opacity(0.8)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                background
                 VStack(spacing: 16) {
                     Spacer()
-                    Image(.nobetciEczane)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipShape(.circle)
-                        .shadow(radius: 10, x: 10)
-                    
+                    logo
                     Spacer()
-                    MainCell(
-                        viewModel: MainCellViewModel(
-                            systemImage: "list.bullet.circle",
-                            cellTitle: "İLLERE GÖRE",
-                            backgroundImage: .map,
-                            color: [
-                                Color.red,
-                                Color.red.opacity(0.8),
-                                Color.red.opacity(0.6)
-                            ], action: {
-                                // Empty action
-                            }
-                        )
-                    )
-                    
-                    MainCell(
-                        viewModel: MainCellViewModel(
-                            systemImage: "location.circle",
-                            cellTitle: "YAKINIMDAKİLER",
-                            backgroundImage: .pin,
-                            color: [
-                                Color.blue,
-                                Color.blue.opacity(0.8),
-                                Color.blue.opacity(0.4)
-                            ], action: {
-                                // Empty action
-                            }
-                        )
-                    )
+                    provinceCell
+                    locationCell
                     Spacer()
                 }
             }
             .ignoresSafeArea()
         }
+    }
+    
+    private var background: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [Color.red.opacity(0.7), Color.blue.opacity(0.8)]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    private var logo: some View {
+        Image(.nobetciEczane)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 200, height: 200)
+            .clipShape(.circle)
+            .shadow(radius: 10, x: 10)
+    }
+    
+    private var provinceCell: some View {
+        MainCell(
+            viewModel: MainCellViewModel(
+                systemImage: SystemImages.listBulletCircle.rawValue,
+                cellTitle: viewModel.provinceTitle,
+                backgroundImage: .map,
+                color: [
+                    Color.red,
+                    Color.red.opacity(0.8),
+                    Color.red.opacity(0.6)
+                ],
+                destinationView: PharmacyView()
+            )
+        )
+    }
+    
+    private var locationCell: some View {
+        MainCell(
+            viewModel: MainCellViewModel(
+                systemImage: SystemImages.locationCircle.rawValue,
+                cellTitle: viewModel.locationTitle,
+                backgroundImage: .pin,
+                color: [
+                    Color.blue,
+                    Color.blue.opacity(0.8),
+                    Color.blue.opacity(0.4)
+                ],
+                destinationView: LocationView()
+            )
+        )
     }
 }
 
