@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct MainCells: View {
+struct MainCell: View {
+    let viewModel: MainCellViewModel
+    
     var body: some View {
         HStack(spacing: 16) {
-            Image(systemName: "list.bullet.circle")
+            Image(systemName: viewModel.systemImage)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 80, height: 80)
                 .foregroundStyle(.white)
                 .padding(.leading, 24)
-            Text("İLLERE GÖRE")
+            Text(viewModel.cellTitle)
                 .font(.title2)
                 .foregroundStyle(.white)
                 .bold()
@@ -26,26 +28,35 @@ struct MainCells: View {
         .background {
             ZStack {
                 LinearGradient(
-                    colors: [
-                        Color.red,
-                        Color.red.opacity(0.8),
-                        Color.red.opacity(0.5)
-                    ],
+                    colors: viewModel.color,
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                Image(.map)
+                Image(viewModel.backgroundImage)
                     .opacity(0.2)
             }
         }
         .clipShape(.capsule)
         .shadow(radius: 10, x: 10)
-        .onTapGesture {
-            print("Clicked")
-        }
+        .onTapGesture(perform: viewModel.action)
     }
 }
 
 #Preview {
-    MainCells()
+    VStack {
+        MainCell(
+            viewModel: MainCellViewModel(
+                systemImage: "list.bullet.circle",
+                cellTitle: "İLLERE GÖRE",
+                backgroundImage: .map,
+                color: [
+                    Color.red,
+                    Color.red.opacity(0.8),
+                    Color.red.opacity(0.6)
+                ], action: {
+                    // Empty action
+                }
+            )
+        )
+    }
 }

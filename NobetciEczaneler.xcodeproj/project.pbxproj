@@ -17,7 +17,8 @@
 		E96AA8782C73A29F00EA1316 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8772C73A29F00EA1316 /* EndPoint.swift */; };
 		E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8792C73B1E800EA1316 /* NetworkError.swift */; };
 		E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA87C2C73DF7C00EA1316 /* HomeView.swift */; };
-		E96AA8802C73E2CB00EA1316 /* MainCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA87F2C73E2CB00EA1316 /* MainCells.swift */; };
+		E96AA8802C73E2CB00EA1316 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA87F2C73E2CB00EA1316 /* MainCell.swift */; };
+		E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +33,8 @@
 		E96AA8772C73A29F00EA1316 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		E96AA8792C73B1E800EA1316 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E96AA87C2C73DF7C00EA1316 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		E96AA87F2C73E2CB00EA1316 /* MainCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCells.swift; sourceTree = "<group>"; };
+		E96AA87F2C73E2CB00EA1316 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +125,8 @@
 		E96AA87E2C73E2B100EA1316 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E96AA87F2C73E2CB00EA1316 /* MainCells.swift */,
+				E96AA87F2C73E2CB00EA1316 /* MainCell.swift */,
+				E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -199,13 +202,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E96AA8782C73A29F00EA1316 /* EndPoint.swift in Sources */,
+				E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */,
 				E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */,
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
 				E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */,
 				E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */,
-				E96AA8802C73E2CB00EA1316 /* MainCells.swift in Sources */,
+				E96AA8802C73E2CB00EA1316 /* MainCell.swift in Sources */,
 				E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
