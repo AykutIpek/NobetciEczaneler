@@ -11,7 +11,11 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Nöbetçi Eczaneler")
+                Image(.nobetciEczane)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 200)
+                    .clipShape(.circle)
             }
         }
     }
