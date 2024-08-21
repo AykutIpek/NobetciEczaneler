@@ -27,7 +27,6 @@ struct DropdownView: View {
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(radius: 4)
-            .frame(width: 300)
         }
     }
     

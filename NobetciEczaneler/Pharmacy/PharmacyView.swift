@@ -9,65 +9,86 @@ import SwiftUI
 
 struct PharmacyView: View {
     @StateObject private var viewModel = PharmacyViewModel()
-    @State private var provinceSelected: String?
-    @State private var districtSelected: String?
+    @Environment(\.horizontalSizeClass) var sizeClass
+//    let columns = [GridItem(.adaptive(minimum: 300))]
+//    let columns = [GridItem(.fixed(200))]
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                DropdownView(
-                    title: "İl",
-                    prompt: "Seçiniz",
-                    options: Consts.turkishProvinces,
-                    selection: $provinceSelected
-                )
-                .onChange(of: provinceSelected) { _, newProvince in
-                    if let province = newProvince {
-                        Task {
-                            await viewModel.fetchDistricts(for: province)
-                            districtSelected = nil
-                        }
-                    }
+            ZStack {
+                VStack(spacing: 24) {
+                    boxArea
+                    pharmacyItems
+                    Spacer()
                 }
-                
-                DropdownView(
-                    title: "İlçe",
-                    prompt: "Seçiniz",
-                    options: viewModel.districts,
-                    selection: $districtSelected
-                )
-                .disabled(viewModel.districts.isEmpty)
-                .onChange(of: districtSelected) { _,_ in
-                    Task {
-                        await viewModel.loadPharmacies(district: districtSelected ?? "", province: provinceSelected ?? "")
-                    }
-                }
-                
-                if viewModel.isLoading {
-                    ProgressView("Loading...")
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
-                    List(viewModel.pharmacies) { pharmacy in
-                        VStack(alignment: .leading) {
-                            Text(pharmacy.name ?? "")
-                                .font(.headline)
-                            Text(pharmacy.address ?? "")
-                                .font(.subheadline)
-                            Text(pharmacy.dist ?? "")
-                                .font(.subheadline)
-                            Text(pharmacy.phone ?? "")
-                                .font(.subheadline)
-                        }
-                        .padding(.vertical, 4)
-                    }
-                }
-                Spacer()
+                .navigationTitle("Nöbetçi Eczaneler")
             }
-            .navigationTitle("Nöbetçi Eczaneler")
-            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    private var boxArea: some View {
+        HStack(alignment: .top) {
+            province
+            district
+        }
+        .padding(.horizontal)
+    }
+    
+    private var province: some View {
+        DropdownView(
+            title: "İl",
+            prompt: "Seçiniz",
+            options: Consts.turkishProvinces,
+            selection: $viewModel.provinceSelected
+        )
+        .onChange(of: viewModel.provinceSelected) { _, newProvince in
+            if let province = newProvince {
+                Task {
+                    await viewModel.fetchDistricts(for: province)
+                    viewModel.districtSelected = nil
+                    await viewModel.loadPharmacies(district: "", province: province)
+                }
+            }
+        }
+    }
+    
+    private var district: some View {
+        DropdownView(
+            title: "İlçe",
+            prompt: "Seçiniz",
+            options: viewModel.districts,
+            selection: $viewModel.districtSelected
+        )
+        .disabled(viewModel.districts.isEmpty)
+        .onChange(of: viewModel.districtSelected) { _, newDistrict in
+            Task {
+                await viewModel.loadPharmacies(district: newDistrict ?? "", province: viewModel.provinceSelected ?? "")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var pharmacyItems: some View {
+        if viewModel.isLoading {
+            ProgressView("Loading...")
+        } else if let errorMessage = viewModel.errorMessage {
+            Text(errorMessage)
+                .foregroundColor(.red)
+                .padding()
+        } else {
+            List(viewModel.pharmacies) { pharmacy in
+                VStack(alignment: .leading) {
+                    Text(pharmacy.name ?? "")
+                        .font(.headline)
+                    Text(pharmacy.address ?? "")
+                        .font(.subheadline)
+                    Text(pharmacy.dist ?? "")
+                        .font(.subheadline)
+                    Text(pharmacy.phone ?? "")
+                        .font(.subheadline)
+                }
+                .padding(.vertical, 4)
+            }
         }
     }
 }
