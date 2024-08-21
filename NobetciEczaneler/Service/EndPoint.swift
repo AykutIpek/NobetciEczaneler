@@ -9,7 +9,7 @@ import Foundation
 
 enum Endpoint {
     case dutyPharmacy(district: String, province: String)
-    case districtList
+    case districtList(province: String)
     
     var baseURL: String {
         return "https://api.collectapi.com/health/"
@@ -44,8 +44,10 @@ enum Endpoint {
                 URLQueryItem(name: "ilce", value: district),
                 URLQueryItem(name: "il", value: province)
             ]
-        case .districtList:
-            break
+        case .districtList(let province):
+            urlComponents.queryItems = [
+                URLQueryItem(name: "il", value: province)
+            ]
         }
         
         guard let url = urlComponents.url else { return nil }

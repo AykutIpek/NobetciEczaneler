@@ -9,10 +9,40 @@ import SwiftUI
 
 struct PharmacyView: View {
     @StateObject private var viewModel = PharmacyViewModel()
+    @State private var provinceSelected: String?
+    @State private var districtSelected: String?
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 16) {
+                DropdownView(
+                    title: "İl",
+                    prompt: "Seçiniz",
+                    options: Consts.turkishProvinces,
+                    selection: $provinceSelected
+                )
+                .onChange(of: provinceSelected) { _, newProvince in
+                    if let province = newProvince {
+                        Task {
+                            await viewModel.fetchDistricts(for: province)
+                            districtSelected = nil
+                        }
+                    }
+                }
+                
+                DropdownView(
+                    title: "İlçe",
+                    prompt: "Seçiniz",
+                    options: viewModel.districts,
+                    selection: $districtSelected
+                )
+                .disabled(viewModel.districts.isEmpty)
+                .onChange(of: districtSelected) { _,_ in
+                    Task {
+                        await viewModel.loadPharmacies(district: districtSelected ?? "", province: provinceSelected ?? "")
+                    }
+                }
+                
                 if viewModel.isLoading {
                     ProgressView("Loading...")
                 } else if let errorMessage = viewModel.errorMessage {
@@ -34,11 +64,10 @@ struct PharmacyView: View {
                         .padding(.vertical, 4)
                     }
                 }
+                Spacer()
             }
             .navigationTitle("Nöbetçi Eczaneler")
-            .task {
-                await viewModel.loadPharmacies(district: "seferihisar", province: "İzmir")
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

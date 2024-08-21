@@ -24,6 +24,11 @@
 		E9B3B7C32C74DD4C0005F7FB /* Enum+SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */; };
 		E9B3B7C62C74F4C70005F7FB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C52C74F4C70005F7FB /* HomeViewModel.swift */; };
 		E9B3B7C92C74F8BF0005F7FB /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */; };
+		E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */; };
+		E9B3B7CF2C75D1A60005F7FB /* CityDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7CE2C75D1A60005F7FB /* CityDropdownView.swift */; };
+		E9B3B7D12C75DBB10005F7FB /* CityPickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7D02C75DBB10005F7FB /* CityPickerStyle.swift */; };
+		E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7D42C75F0A70005F7FB /* Consts.swift */; };
+		E9DD54222C75FAD60089DF84 /* DistrictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54212C75FAD60089DF84 /* DistrictModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+SystemImages.swift"; sourceTree = "<group>"; };
 		E9B3B7C52C74F4C70005F7FB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
+		E9B3B7CE2C75D1A60005F7FB /* CityDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDropdownView.swift; sourceTree = "<group>"; };
+		E9B3B7D02C75DBB10005F7FB /* CityPickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPickerStyle.swift; sourceTree = "<group>"; };
+		E9B3B7D42C75F0A70005F7FB /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		E9DD54212C75FAD60089DF84 /* DistrictModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +112,7 @@
 		E96AA86D2C735B4C00EA1316 /* Pharmacy */ = {
 			isa = PBXGroup;
 			children = (
-				E96AA8752C735D1A00EA1316 /* PharmacyModel.swift */,
+				E9DD54202C75FAC70089DF84 /* API */,
 				E96AA8612C73587A00EA1316 /* PharmacyView.swift */,
 				E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */,
 			);
@@ -142,6 +152,9 @@
 			children = (
 				E96AA87F2C73E2CB00EA1316 /* MainCell.swift */,
 				E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */,
+				E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */,
+				E9B3B7CE2C75D1A60005F7FB /* CityDropdownView.swift */,
+				E9B3B7D02C75DBB10005F7FB /* CityPickerStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -151,6 +164,7 @@
 			children = (
 				E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */,
 				E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */,
+				E9B3B7D42C75F0A70005F7FB /* Consts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -169,6 +183,15 @@
 				E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		E9DD54202C75FAC70089DF84 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E96AA8752C735D1A00EA1316 /* PharmacyModel.swift */,
+				E9DD54212C75FAD60089DF84 /* DistrictModel.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,13 +268,18 @@
 			files = (
 				E96AA8782C73A29F00EA1316 /* EndPoint.swift in Sources */,
 				E9B3B7C92C74F8BF0005F7FB /* LocationView.swift in Sources */,
+				E9B3B7CF2C75D1A60005F7FB /* CityDropdownView.swift in Sources */,
 				E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */,
 				E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */,
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
+				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
+				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
 				E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */,
+				E9B3B7D12C75DBB10005F7FB /* CityPickerStyle.swift in Sources */,
 				E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */,
+				E9DD54222C75FAD60089DF84 /* DistrictModel.swift in Sources */,
 				E96AA8802C73E2CB00EA1316 /* MainCell.swift in Sources */,
 				E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */,
 				E9B3B7C32C74DD4C0005F7FB /* Enum+SystemImages.swift in Sources */,
