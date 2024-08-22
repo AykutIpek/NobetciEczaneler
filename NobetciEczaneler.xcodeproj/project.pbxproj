@@ -33,6 +33,7 @@
 		E9DD542A2C7745470089DF84 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54292C7745460089DF84 /* AnyOptional.swift */; };
 		E9DD542E2C7753930089DF84 /* PharmaciesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD542D2C7753930089DF84 /* PharmaciesCellViewModel.swift */; };
 		E9DD54312C77573E0089DF84 /* PharmacyViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */; };
+		E9DD54332C7779890089DF84 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54322C7779890089DF84 /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		E9DD54292C7745460089DF84 /* AnyOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		E9DD542D2C7753930089DF84 /* PharmaciesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmaciesCellViewModel.swift; sourceTree = "<group>"; };
 		E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewState.swift; sourceTree = "<group>"; };
+		E9DD54322C7779890089DF84 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				E9DD54252C77434B0089DF84 /* OptionalExtensions.swift */,
 				E9DD54272C7744C30089DF84 /* StringExtensions.swift */,
 				E9DD54292C7745460089DF84 /* AnyOptional.swift */,
+				E9DD54322C7779890089DF84 /* View+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
+				E9DD54332C7779890089DF84 /* View+Extension.swift in Sources */,
 				E9DD542E2C7753930089DF84 /* PharmaciesCellViewModel.swift in Sources */,
 				E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */,
 				E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */,
@@ -371,7 +375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -428,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -461,6 +465,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aykutipek.NobetciEczaneler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,6 +497,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aykutipek.NobetciEczaneler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
