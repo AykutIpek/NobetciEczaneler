@@ -12,5 +12,6 @@ enum SystemImages: String {
     case listBulletCircle = "list.bullet.circle"
     case locationCircle  = "location.circle"
     case chevronDown  = "chevron.down"
+    case chevronRight  = "chevron.right"
     case checkmark = "checkmark"
 }

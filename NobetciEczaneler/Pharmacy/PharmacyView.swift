@@ -10,19 +10,16 @@ import SwiftUI
 struct PharmacyView: View {
     @StateObject private var viewModel = PharmacyViewModel()
     @Environment(\.horizontalSizeClass) var sizeClass
-//    let columns = [GridItem(.adaptive(minimum: 300))]
-//    let columns = [GridItem(.fixed(200))]
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                VStack(spacing: 24) {
-                    boxArea
-                    pharmacyItems
-                    Spacer()
-                }
-                .navigationTitle("Nöbetçi Eczaneler")
+            VStack(spacing: 24) {
+                boxArea
+                pharmacyItems
+                Spacer()
             }
+            .navigationTitle("Nöbetçi Eczaneler")
+            .ignoresSafeArea(.container, edges: .bottom)
         }
     }
     
@@ -31,7 +28,7 @@ struct PharmacyView: View {
             province
             district
         }
-        .padding(.horizontal)
+        .padding(.horizontal, sizeClass == .compact ? 16 : 64)
     }
     
     private var province: some View {
@@ -46,7 +43,7 @@ struct PharmacyView: View {
                 Task {
                     await viewModel.fetchDistricts(for: province)
                     viewModel.districtSelected = nil
-                    await viewModel.loadPharmacies(district: "", province: province)
+                    await viewModel.loadPharmacies(district: .empty, province: province)
                 }
             }
         }
@@ -60,34 +57,42 @@ struct PharmacyView: View {
             selection: $viewModel.districtSelected
         )
         .disabled(viewModel.districts.isEmpty)
+        .opacity(viewModel.districts.isEmpty ? 0.2 : 1)
         .onChange(of: viewModel.districtSelected) { _, newDistrict in
             Task {
-                await viewModel.loadPharmacies(district: newDistrict ?? "", province: viewModel.provinceSelected ?? "")
+                await viewModel.loadPharmacies(district: newDistrict.orEmptyString, province: viewModel.provinceSelected.orEmptyString)
             }
         }
     }
     
     @ViewBuilder
     private var pharmacyItems: some View {
-        if viewModel.isLoading {
+        switch viewModel.state {
+        case .loading:
             ProgressView("Loading...")
-        } else if let errorMessage = viewModel.errorMessage {
+        case .error(let errorMessage):
             Text(errorMessage)
                 .foregroundColor(.red)
                 .padding()
-        } else {
-            List(viewModel.pharmacies) { pharmacy in
-                VStack(alignment: .leading) {
-                    Text(pharmacy.name ?? "")
-                        .font(.headline)
-                    Text(pharmacy.address ?? "")
-                        .font(.subheadline)
-                    Text(pharmacy.dist ?? "")
-                        .font(.subheadline)
-                    Text(pharmacy.phone ?? "")
-                        .font(.subheadline)
+        case .loaded(let pharmacy):
+            ScrollView {
+                ForEach(pharmacy, id: \.self) { pharmacy in
+                    PharmaciesCell(
+                        viewModel: PharmaciesCellViewModel(
+                            pharmacies: pharmacy.name.orEmptyString,
+                            city: pharmacy.dist.orEmptyString,
+                            phone: pharmacy.phone.orEmptyString,
+                            location: pharmacy.address.orEmptyString
+                        )
+                    )
+                    .padding(.horizontal, sizeClass == .compact ? 16 : 48)
                 }
-                .padding(.vertical, 4)
+            }
+        case .loadedDistricts(let districts):
+            if districts.isEmpty {
+                Text("No districts available.")
+                    .foregroundColor(.gray)
+                    .padding()
             }
         }
     }

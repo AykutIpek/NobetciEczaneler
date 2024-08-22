@@ -40,6 +40,7 @@ struct DropdownView: View {
     private var cellView: some View {
         HStack {
             Text(selection ?? prompt)
+                .font(.subheadline)
             Spacer()
             Image(systemName: SystemImages.chevronDown.rawValue)
                 .font(.subheadline)
@@ -61,6 +62,7 @@ struct DropdownView: View {
             ForEach(options, id: \.self) { option in
                 HStack {
                     Text(option)
+                        .font(.subheadline)
                         .foregroundStyle(selection == option ? Color.black : Color.gray)
                     Spacer()
                     if selection == option {

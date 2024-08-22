@@ -13,7 +13,7 @@ struct PharmacyResponse: Decodable {
     let result: [PharmacyModel]
 }
 
-struct PharmacyModel: Decodable, Identifiable {
+struct PharmacyModel: Decodable, Identifiable, Hashable {
     var id: UUID = UUID()
     let name: String?
     let dist: String?

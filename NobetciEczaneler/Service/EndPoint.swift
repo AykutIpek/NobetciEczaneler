@@ -28,10 +28,11 @@ enum Endpoint {
         return baseURL + path
     }
     
+    /// apikey 12MpJ9zGxA86s7qlDEq8u7:2FWJ7bjDFzNhrxDhLsjQqX
     var headers: [String: String] {
         return [
             "content-type": "application/json",
-            "authorization": "apikey 12MpJ9zGxA86s7qlDEq8u7:2FWJ7bjDFzNhrxDhLsjQqX"
+            "authorization": "apikey 0ERDWsYb4cWNpNFnm4t0LS:2AfyYohdO1ZGT0y0AMVfTo"
         ]
     }
     

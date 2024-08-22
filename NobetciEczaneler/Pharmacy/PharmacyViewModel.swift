@@ -6,33 +6,31 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class PharmacyViewModel: ObservableObject {
     @Published var pharmacies: [PharmacyModel] = []
     @Published var districts: [String] = []
-    @Published var errorMessage: String? = nil
-    @Published var isLoading: Bool = false
     @Published var provinceSelected: String?
     @Published var districtSelected: String?
-    
+    @Published var state: PharmacyViewState = .loading
     private let retryLimit = 3
     private let retryDelay: UInt64 = 1_000_000_000
     
     @MainActor
     func loadPharmacies(district: String, province: String) async {
-        isLoading = true
-        errorMessage = nil
+        state = .loading
         
         let result = await performRequestWithRetry { [weak self] in
             await self?.fetchPharmacies(district: district, province: province) ?? .failure(.custom(errorMessage: "Unexpected error"))
         }
         
-        isLoading = false
         switch result {
         case .success(let pharmacies):
             self.pharmacies = pharmacies
+            state = .loaded(pharmacies)
         case .failure(let error):
-            self.errorMessage = error.localizedDescription
+            state = .error(error.localizedDescription)
         }
     }
 
@@ -51,19 +49,18 @@ final class PharmacyViewModel: ObservableObject {
     
     @MainActor
     func fetchDistricts(for province: String) async {
-        isLoading = true
-        errorMessage = nil
+        state = .loading
         
         let result = await performRequestWithRetry { [weak self] in
             await self?.fetchDistrictsFromAPI(province: province) ?? .failure(.custom(errorMessage: "Unexpected error"))
         }
         
-        isLoading = false
         switch result {
         case .success(let districts):
             self.districts = districts
+            state = .loadedDistricts(districts)
         case .failure(let error):
-            self.errorMessage = error.localizedDescription
+            state = .error(error.localizedDescription)
         }
     }
 
