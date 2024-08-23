@@ -80,6 +80,7 @@ struct PharmaciesCell: View {
                 Text(location)
                     .foregroundStyle(.black)
                     .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
                 Spacer()
             }
         }
@@ -160,7 +161,7 @@ struct PharmaciesCell: View {
                     pharmacies: "Demir Eczanesi",
                     city: "İzmir",
                     phone: "05354312365",
-                    location: "İstasyon Mahellesi, Leylak Caddesi no:16/1 Erdal apartmanı"
+                    location: "KOYUNCU MAHALLESİ İSTANSYON CADDESİ NO:3 BUCA/ KAYNAKLAR ÇEŞME YANI"
                 )
             )
             
