@@ -7,44 +7,62 @@
 
 import Foundation
 import SwiftUI
+import Combine
+
 
 final class PharmacyViewModel: ObservableObject {
     @Published var pharmacies: [PharmacyModel] = []
+    @Published var filteredPharmacies: [PharmacyModel] = []
     @Published var districts: [String] = []
     @Published var provinceSelected: String?
     @Published var districtSelected: String?
+    @Published var searchText: String = ""
     @Published var state: PharmacyViewState = .loading
+    private var cancellables: Set<AnyCancellable> = []
     private let retryLimit = 3
     private let retryDelay: UInt64 = 1_000_000_000
+    
+    init() {
+        $searchText
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .sink { [weak self] newSearchText in
+                self?.searchText = newSearchText
+                self?.filterPharmacies()
+            }
+            .store(in: &cancellables)
+    }
     
     @MainActor
     func loadPharmacies(district: String, province: String) async {
         state = .loading
+
+        let convertedProvince = convertToEnglishCharacters(text: province)
         
         let result = await performRequestWithRetry { [weak self] in
-            await self?.fetchPharmacies(district: district, province: province) ?? .failure(.custom(errorMessage: "Unexpected error"))
+            await self?.fetchPharmacies(district: district, province: convertedProvince) ?? .failure(.custom(errorMessage: "Unexpected error"))
         }
         
         switch result {
         case .success(let pharmacies):
             self.pharmacies = pharmacies
+            self.filteredPharmacies = pharmacies
             state = .loaded(pharmacies)
         case .failure(let error):
             state = .error(error.localizedDescription)
         }
     }
-
     
-    private func fetchPharmacies(district: String, province: String) async -> Result<[PharmacyModel], NetworkError> {
-        let endpoint = Endpoint.dutyPharmacy(district: district, province: province)
-        let response: Result<PharmacyResponse, NetworkError> = await Service.request(endpoint: endpoint, responseType: PharmacyResponse.self)
+    func convertToEnglishCharacters(text: String) -> String {
+        let turkishToEnglishMapping: [String: String] = [
+            "Ç": "C", "Ğ": "G", "İ": "I", "Ö": "O", "Ş": "S", "Ü": "U",
+            "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u"
+        ]
         
-        switch response {
-        case .success(let pharmacyResponse):
-            return .success(pharmacyResponse.result)
-        case .failure(let error):
-            return .failure(error)
+        var convertedText = text
+        for (turkishChar, englishChar) in turkishToEnglishMapping {
+            convertedText = convertedText.replacingOccurrences(of: turkishChar, with: englishChar)
         }
+        return convertedText
     }
     
     @MainActor
@@ -61,6 +79,29 @@ final class PharmacyViewModel: ObservableObject {
             state = .loadedDistricts(districts)
         case .failure(let error):
             state = .error(error.localizedDescription)
+        }
+    }
+    
+    private func filterPharmacies() {
+        if searchText.isEmpty {
+            filteredPharmacies = pharmacies
+        } else {
+            filteredPharmacies = pharmacies.filter { pharmacy in
+                let name = pharmacy.name?.lowercased() ?? ""
+                return name.contains(searchText.lowercased())
+            }
+        }
+    }
+    
+    private func fetchPharmacies(district: String, province: String) async -> Result<[PharmacyModel], NetworkError> {
+        let endpoint = Endpoint.dutyPharmacy(district: district, province: province)
+        let response: Result<PharmacyResponse, NetworkError> = await Service.request(endpoint: endpoint, responseType: PharmacyResponse.self)
+        
+        switch response {
+        case .success(let pharmacyResponse):
+            return .success(pharmacyResponse.result)
+        case .failure(let error):
+            return .failure(error)
         }
     }
 
@@ -104,4 +145,3 @@ final class PharmacyViewModel: ObservableObject {
         return .failure(.custom(errorMessage: "Request failed after \(retryLimit) attempts."))
     }
 }
-

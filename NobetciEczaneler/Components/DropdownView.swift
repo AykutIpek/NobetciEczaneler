@@ -12,7 +12,7 @@ struct DropdownView: View {
     let prompt: String
     let options: [String]
     
-    @State private var isExpended = false
+    @State private var isExpanded = false
     @Binding var selection: String?
     
     var body: some View {
@@ -20,7 +20,7 @@ struct DropdownView: View {
             header
             VStack {
                 cellView
-                if isExpended {
+                if isExpanded {
                     listItems
                 }
             }
@@ -45,14 +45,14 @@ struct DropdownView: View {
             Image(systemName: SystemImages.chevronDown.rawValue)
                 .font(.subheadline)
                 .foregroundStyle(.gray)
-                .rotationEffect(.degrees(isExpended ? 180 : .zero))
+                .rotationEffect(.degrees(isExpanded ? 180 : .zero))
         }
         .frame(height: 40)
         .background(Color.white)
         .padding(.horizontal)
         .onTapGesture {
             withAnimation(.snappy) {
-                isExpended.toggle()
+                isExpanded.toggle()
             }
         }
     }
@@ -76,16 +76,16 @@ struct DropdownView: View {
                 .onTapGesture {
                     withAnimation(.snappy) {
                         selection = option
-                        isExpended.toggle()
+                        isExpanded.toggle()
                     }
                 }
             }
-            
         }
         .frame(idealHeight: 100, maxHeight: 250)
         .transition(.move(edge: .bottom))
     }
 }
+
 
 
 #Preview {

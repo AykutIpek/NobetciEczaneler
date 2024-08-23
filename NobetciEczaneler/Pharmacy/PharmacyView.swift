@@ -19,13 +19,14 @@ struct PharmacyView: View {
                         pharmacyItems
                         Spacer()
                     }
-                    .padding(.top, 80)
+                    .padding(.top, 120)
                     boxArea
                 }
             }
             .disableBounces()
             .scrollIndicators(.hidden)
             .navigationTitle("Nöbetçi Eczaneler")
+            .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea(.container, edges: .bottom)
             .onLoad {
                 viewModel.state = .onLoad
@@ -33,12 +34,21 @@ struct PharmacyView: View {
         }
     }
     
+    private var searchBar: some View {
+        TextField("Eczane Ara", text: $viewModel.searchText)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding(.horizontal)
+    }
+    
     private var boxArea: some View {
-        HStack(alignment: .top) {
-            province
-            district
+        VStack {
+            searchBar
+            HStack(alignment: .top) {
+                province
+                district
+            }
+            .padding(.horizontal, sizeClass == .compact ? 16 : 64)
         }
-        .padding(.horizontal, sizeClass == .compact ? 16 : 64)
     }
     
     private var province: some View {
@@ -50,10 +60,11 @@ struct PharmacyView: View {
         )
         .onChange(of: viewModel.provinceSelected) { newProvince in
             if let province = newProvince {
+                let convertedProvince = viewModel.convertToEnglishCharacters(text: province)
                 Task {
-                    await viewModel.fetchDistricts(for: province)
+                    await viewModel.fetchDistricts(for: convertedProvince)
                     viewModel.districtSelected = nil
-                    await viewModel.loadPharmacies(district: .empty, province: province)
+                    await viewModel.loadPharmacies(district: .empty, province: convertedProvince)
                 }
             }
         }
@@ -84,9 +95,9 @@ struct PharmacyView: View {
         case .error(let errorMessage):
             Text(errorMessage)
                 .foregroundColor(.red)
-                .padding(.top, 100)
-        case .loaded(let pharmacy):
-            ForEach(pharmacy, id: \.self) { pharmacy in
+                .padding(.top, 150)
+        case .loaded:
+            ForEach(viewModel.filteredPharmacies, id: \.self) { pharmacy in
                 PharmaciesCell(
                     viewModel: PharmaciesCellViewModel(
                         pharmacies: pharmacy.name.orEmptyString,
@@ -113,10 +124,11 @@ struct PharmacyView: View {
                     .font(.title2)
                     .foregroundStyle(.gray)
             }
-            .padding(.top, 100)
+            .padding(.top, 150)
         }
     }
 }
+
 
 #Preview {
     PharmacyView()
