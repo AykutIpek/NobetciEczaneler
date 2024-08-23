@@ -12,4 +12,5 @@ enum PharmacyViewState {
     case error(String)
     case loaded([PharmacyModel])
     case loadedDistricts([String])
+    case onLoad
 }

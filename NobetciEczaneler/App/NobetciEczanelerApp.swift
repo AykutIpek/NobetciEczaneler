@@ -11,7 +11,8 @@ import SwiftUI
 struct NobetciEczanelerApp: App {
     var body: some Scene {
         WindowGroup {
-            PharmacyView()
+            HomeView()
+                .environment(\.colorScheme, .light)
         }
     }
 }

@@ -34,6 +34,7 @@
 		E9DD542E2C7753930089DF84 /* PharmaciesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD542D2C7753930089DF84 /* PharmaciesCellViewModel.swift */; };
 		E9DD54312C77573E0089DF84 /* PharmacyViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */; };
 		E9DD54332C7779890089DF84 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54322C7779890089DF84 /* View+Extension.swift */; };
+		E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		E9DD542D2C7753930089DF84 /* PharmaciesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmaciesCellViewModel.swift; sourceTree = "<group>"; };
 		E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewState.swift; sourceTree = "<group>"; };
 		E9DD54322C7779890089DF84 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				E9DD54272C7744C30089DF84 /* StringExtensions.swift */,
 				E9DD54292C7745460089DF84 /* AnyOptional.swift */,
 				E9DD54322C7779890089DF84 /* View+Extension.swift */,
+				E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				E9DD54312C77573E0089DF84 /* PharmacyViewState.swift in Sources */,
 				E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */,
 				E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */,
+				E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */,
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,

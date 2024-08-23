@@ -27,6 +27,9 @@ struct PharmacyView: View {
             .scrollIndicators(.hidden)
             .navigationTitle("Nöbetçi Eczaneler")
             .ignoresSafeArea(.container, edges: .bottom)
+            .onLoad {
+                viewModel.state = .onLoad
+            }
         }
     }
     
@@ -100,6 +103,17 @@ struct PharmacyView: View {
                     .foregroundColor(.gray)
                     .padding()
             }
+        case .onLoad:
+            VStack(spacing: 16) {
+                Image(systemName: "storefront.fill")
+                    .font(.system(size: 80))
+                    .foregroundStyle(.gray)
+                
+                Text("Bir Şehir Seçin")
+                    .font(.title2)
+                    .foregroundStyle(.gray)
+            }
+            .padding(.top, 100)
         }
     }
 }
