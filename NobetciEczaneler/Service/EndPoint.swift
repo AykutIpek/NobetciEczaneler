@@ -28,6 +28,7 @@ enum Endpoint {
         return baseURL + path
     }
     
+    /// - apikey 7xVsNFn6fX7R6Yzh7TXB1o:2MTiHDeZFmswoQMPUprmB3
     var headers: [String: String] {
         return [
             "content-type": "application/json",

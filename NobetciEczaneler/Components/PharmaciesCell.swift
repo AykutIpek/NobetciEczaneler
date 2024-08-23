@@ -12,26 +12,28 @@ struct PharmaciesCell: View {
     @State private var cellDidTapped: Bool = false
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 10) {
-                pharmaciesText
-                cityText
-                phoneText
-                locationText
-                buttonsArea
+        NavigationStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    pharmaciesText
+                    cityText
+                    phoneText
+                    addressText
+                    buttonsArea
+                }
+                chevronRight
             }
-            chevronRight
+            .padding(.all)
+            .background(Color.white)
+            .clipShape(.rect(cornerRadius: 12))
+            .shadow(radius: 10, x: 2, y: 10)
+            .padding(.horizontal)
+            .onTapGesture {
+                guard viewModel.checkLocationAndPhoneText else { return }
+                withAnimation(.bouncy) {
+                    cellDidTapped.toggle()
+                }
         }
-        .padding(.all)
-        .background(Color.white)
-        .clipShape(.rect(cornerRadius: 12))
-        .shadow(radius: 10, x: 2, y: 10)
-        .padding(.horizontal)
-        .onTapGesture {
-            guard viewModel.checkLocationAndPhoneText else { return }
-            withAnimation(.bouncy) {
-                cellDidTapped.toggle()
-            }
         }
     }
     
@@ -72,12 +74,12 @@ struct PharmaciesCell: View {
     }
     
     @ViewBuilder
-    private var locationText: some View {
-        if let location = viewModel.location, location.isNotEmpty {
+    private var addressText: some View {
+        if let address = viewModel.address, address.isNotEmpty {
             HStack(alignment: .firstTextBaseline) {
                 Image(systemName: "location.fill")
                     .foregroundStyle(.red)
-                Text(location)
+                Text(address)
                     .foregroundStyle(.black)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
@@ -125,8 +127,12 @@ struct PharmaciesCell: View {
     @ViewBuilder
     private var locationButton: some View {
         if let location = viewModel.location, location.isNotEmpty {
-            Button {
-                
+            NavigationLink {
+                PharmacyLocationView(
+                    viewModel: PharmacyLocationViewModel(
+                        location: location
+                    )
+                )
             } label: {
                 HStack {
                     Image(systemName: "location.circle.fill")
@@ -161,7 +167,8 @@ struct PharmaciesCell: View {
                     pharmacies: "Demir Eczanesi",
                     city: "İzmir",
                     phone: "05354312365",
-                    location: "KOYUNCU MAHALLESİ İSTANSYON CADDESİ NO:3 BUCA/ KAYNAKLAR ÇEŞME YANI"
+                    address: "KOYUNCU MAHALLESİ İSTANSYON CADDESİ NO:3 BUCA/ KAYNAKLAR ÇEŞME YANI",
+                    location:  "32.0000, 32.0000"
                 )
             )
             
@@ -170,7 +177,8 @@ struct PharmaciesCell: View {
                     pharmacies: "Demir Eczanesi",
                     city: "İzmir",
                     phone: .empty,
-                    location: "İstasyon Mahellesi, Leylak Caddesi no:16/1 Erdal apartmanı"
+                    address: "İstasyon Mahellesi, Leylak Caddesi no:16/1 Erdal apartmanı",
+                    location:  "32.0000, 32.0000"
                 )
             )
             
@@ -179,7 +187,8 @@ struct PharmaciesCell: View {
                     pharmacies: "Demir Eczanesi",
                     city: "İzmir",
                     phone: .empty,
-                    location: .empty
+                    address: .empty,
+                    location: "32.0000, 32.0000"
                 )
             )
             
@@ -188,7 +197,8 @@ struct PharmaciesCell: View {
                     pharmacies: "Demir Eczanesi",
                     city: "İzmir",
                     phone: .empty,
-                    location: "İstasyon Mahellesi, Leylak Caddesi no:16/1 Erdal apartmanı"
+                    address: "İstasyon Mahellesi, Leylak Caddesi no:16/1 Erdal apartmanı", 
+                    location: "32.0000, 32.0000"
                 )
             )
             

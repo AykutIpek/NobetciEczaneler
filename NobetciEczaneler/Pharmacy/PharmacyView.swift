@@ -103,7 +103,8 @@ struct PharmacyView: View {
                         pharmacies: pharmacy.name.orEmptyString,
                         city: pharmacy.dist.orEmptyString,
                         phone: pharmacy.phone.orEmptyString,
-                        location: pharmacy.address.orEmptyString
+                        address: pharmacy.address.orEmptyString,
+                        location: pharmacy.loc.orEmptyString
                     )
                 )
                 .padding(.horizontal, sizeClass == .compact ? .zero : 48)

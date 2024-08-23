@@ -37,6 +37,7 @@
 		E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */; };
 		E9DD543A2C7873F00089DF84 /* PharmacyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54392C7873F00089DF84 /* PharmacyLocation.swift */; };
 		E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */; };
+		E9DD543E2C78E42F0089DF84 /* MapRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		E9DD54392C7873F00089DF84 /* PharmacyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyLocation.swift; sourceTree = "<group>"; };
 		E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyLocationViewModel.swift; sourceTree = "<group>"; };
+		E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 			children = (
 				E9DD54392C7873F00089DF84 /* PharmacyLocation.swift */,
 				E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */,
+				E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */,
 			);
 			path = PharmacyLocation;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
+				E9DD543E2C78E42F0089DF84 /* MapRouteView.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
@@ -473,6 +477,7 @@
 				DEVELOPMENT_TEAM = 5Z6579228A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Konumunuza erişmek istiyoruz";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -505,6 +510,7 @@
 				DEVELOPMENT_TEAM = 5Z6579228A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Konumunuza erişmek istiyoruz";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
