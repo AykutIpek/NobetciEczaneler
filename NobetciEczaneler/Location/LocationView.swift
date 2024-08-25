@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct LocationView: View {
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            
+        }
     }
 }
 

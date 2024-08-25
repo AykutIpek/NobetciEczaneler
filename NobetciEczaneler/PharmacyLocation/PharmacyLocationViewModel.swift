@@ -10,53 +10,76 @@ import CoreLocation
 import MapKit
 
 final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var pinCoordinate: CLLocationCoordinate2D? // Keep this as CLLocationCoordinate2D?
-    @Published var userLocation: CLLocationCoordinate2D? // Assume this is being set elsewhere
+    //MARK: - Published
+    @Published var pinCoordinate: CLLocationCoordinate2D?
+    @Published var userLocation: CLLocationCoordinate2D?
     @Published var route: MKRoute?
+    @Published var region: MKCoordinateRegion
+    @Published var selectedPharmacy: PharmacyModel?
     @Published var pinTapped: Bool = false
-    @Published var region: MKCoordinateRegion = MKCoordinateRegion() // Initial region
-
+    //MARK: - Model
+    @Published var pharmacyName: String?
+    @Published var pharmacyAddress: String?
+    @Published var pharmacyDist: String?
+    @Published var pharmacyLoc: String?
+    @Published var pharmacyPhone: String?
+    //MARK: - Private Helpers
     private let locationManager = CLLocationManager()
     
-    init(location: String) {
-        // Default region centered on Turkey
-        self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.0, longitude: 35.0),
-                                         span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    
+    init(_ model: PharmacyModel?) {
+        self.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 39.0, longitude: 35.0),
+            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        )
         super.init()
+        selectedPharmacyModel(model)
+        onLoad()
+    }
+    
+    private func onLoad() {
         locationManager.delegate = self
-        parseLocation(location)
-        requestLocation()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        setPinCoordinate(from: pharmacyLoc)
+    }
+    
+    private func selectedPharmacyModel(_ model: PharmacyModel?) {
+        selectedPharmacy = model
+        pharmacyName = (model?.name).orEmptyString
+        pharmacyAddress = (model?.address).orEmptyString
+        pharmacyDist = (model?.dist).orEmptyString
+        pharmacyLoc = (model?.loc).orEmptyString
+        pharmacyPhone = (model?.phone).orEmptyString
     }
 
-    private func parseLocation(_ location: String) {
-        let components = location
+    private func setPinCoordinate(from location: String?) {
+        let components = location.orEmptyString
             .split(separator: ",")
             .compactMap { Double($0.trimmingCharacters(in: .whitespaces)) }
         
         if components.count == 2 {
             let coordinate = CLLocationCoordinate2D(latitude: components[0], longitude: components[1])
-            pinCoordinate = coordinate // Assigning CLLocationCoordinate2D directly
+            pinCoordinate = coordinate
             region = MKCoordinateRegion(
                 center: coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             )
         }
-    }
-
-    private func requestLocation() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             userLocation = location.coordinate
-            locationManager.stopUpdatingLocation() // Stop after getting the current location
+            locationManager.stopUpdatingLocation()
         }
     }
 
     func getDirections() {
-        guard let userLocation = userLocation, let destination = pinCoordinate else { return }
+        guard let userLocation = userLocation, let destination = pinCoordinate else {
+            print("Error: Missing location data.")
+            return
+        }
 
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation))
@@ -65,9 +88,36 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
 
         let directions = MKDirections(request: request)
         directions.calculate { [weak self] response, error in
-            guard let route = response?.routes.first else { return }
-            self?.route = route
+            if let error = error {
+                print("Error calculating directions: \(error.localizedDescription)")
+                return
+            }
+            guard let route = response?.routes.first else {
+                print("No route found.")
+                return
+            }
+            DispatchQueue.main.async {
+                self?.route = route
+                print("Route found with distance: \(route.distance)")
+            }
         }
     }
-}
+    
+    func setupInitialRegion() {
+        if let pinCoordinate = pinCoordinate {
+            region = MKCoordinateRegion(
+                center: pinCoordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+            )
+        }
+    }
 
+    func selectPharmacy() {
+        self.pinTapped = true
+    }
+
+    func deselectPharmacy() {
+        self.selectedPharmacy = nil
+        self.pinTapped = false
+    }
+}

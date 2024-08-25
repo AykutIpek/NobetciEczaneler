@@ -126,24 +126,28 @@ struct PharmaciesCell: View {
     
     @ViewBuilder
     private var locationButton: some View {
-        if let location = viewModel.location, location.isNotEmpty {
-            NavigationLink {
-                PharmacyLocationView(
-                    viewModel: PharmacyLocationViewModel(
-                        location: location
+        NavigationLink {
+            PharmacyLocationView(
+                viewModel: PharmacyLocationViewModel(
+                    PharmacyModel(
+                        name: viewModel.pharmacies,
+                        dist: viewModel.city,
+                        address: viewModel.address,
+                        phone: viewModel.phone,
+                        loc: viewModel.location
                     )
                 )
-            } label: {
-                HStack {
-                    Image(systemName: "location.circle.fill")
-                        .foregroundStyle(.blue)
-                        .font(.largeTitle)
-                    
-                    Text("Yol Tarifi")
-                        .foregroundStyle(.black)
-                        .font(.subheadline)
-                        .bold()
-                }
+            )
+        } label: {
+            HStack {
+                Image(systemName: "location.circle.fill")
+                    .foregroundStyle(.blue)
+                    .font(.largeTitle)
+                
+                Text("Yol Tarifi")
+                    .foregroundStyle(.black)
+                    .font(.subheadline)
+                    .bold()
             }
         }
     }
