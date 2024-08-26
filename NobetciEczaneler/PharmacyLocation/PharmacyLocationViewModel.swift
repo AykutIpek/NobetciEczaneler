@@ -46,11 +46,11 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
     
     private func selectedPharmacyModel(_ model: PharmacyModel?) {
         selectedPharmacy = model
-        pharmacyName = (model?.name).orEmptyString
-        pharmacyAddress = (model?.address).orEmptyString
-        pharmacyDist = (model?.dist).orEmptyString
-        pharmacyLoc = (model?.loc).orEmptyString
-        pharmacyPhone = (model?.phone).orEmptyString
+        pharmacyName = model?.name.orEmptyString
+        pharmacyAddress = model?.address.orEmptyString
+        pharmacyDist = model?.dist.orEmptyString
+        pharmacyLoc = model?.loc.orEmptyString
+        pharmacyPhone = model?.phone.orEmptyString
     }
 
     private func setPinCoordinate(from location: String?) {
@@ -66,6 +66,12 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
                 span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             )
         }
+    }
+    
+    private func updateRegion(for route: MKRoute) {
+        let mapRect = route.polyline.boundingMapRect
+        let region = MKCoordinateRegion(mapRect)
+        self.region = region
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -98,11 +104,11 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
             }
             DispatchQueue.main.async {
                 self?.route = route
-                print("Route found with distance: \(route.distance)")
+                self?.updateRegion(for: route)
             }
         }
     }
-    
+
     func setupInitialRegion() {
         if let pinCoordinate = pinCoordinate {
             region = MKCoordinateRegion(

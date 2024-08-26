@@ -16,65 +16,65 @@ struct IdentifiableCoordinate: Identifiable {
 
 struct PharmacyLocationView: View {
     @StateObject var viewModel: PharmacyLocationViewModel
+    @State private var isBottomSheetPresented = false
 
     var body: some View {
-        ZStack {
-            mapView
-            pinView
-        }
-        .onAppear {
-            viewModel.setupInitialRegion()
-        }
-    }
-    
-    private var mapView: some View {
-        Map(
-            coordinateRegion: $viewModel.region,
-            showsUserLocation: true,
-            annotationItems: [viewModel.pinCoordinate].compactMap { coordinate in
-                guard let coordinate = coordinate else { return nil }
-                return IdentifiableCoordinate(coordinate: coordinate)
-            },
-            annotationContent: { (coordinateWrapper: IdentifiableCoordinate) in
-                MapAnnotation(coordinate: coordinateWrapper.coordinate) {
-                    Image(systemName: "pills.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: viewModel.pinTapped ? 80 : 40, height: viewModel.pinTapped ? 80 : 40)
-                        .foregroundColor(.red)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0), value: viewModel.pinTapped)
-                        .onTapGesture {
-                            withAnimation {
-                                viewModel.pinTapped.toggle()
-                            }
-                            viewModel.getDirections()
-                        }
-                }
+        GeometryReader { geometry in
+            ZStack {
+                mapView
             }
-        )
-        .edgesIgnoringSafeArea(.all)
-    }
-    
-    @ViewBuilder
-    private var pinView: some View {
-        if viewModel.pinTapped, let selectedPharmacy = viewModel.selectedPharmacy {
-            VStack {
-                Spacer()
+            .onAppear {
+                viewModel.setupInitialRegion()
+            }
+            .sheet(isPresented: $isBottomSheetPresented) {
                 BottomSheetView(
-                    pharmacy: selectedPharmacy,
+                    pharmacy: viewModel.selectedPharmacy ?? PharmacyModel(name: "", dist: "", address: "", phone: "", loc: ""),
                     onDismiss: {
-                        withAnimation {
-                            viewModel.deselectPharmacy()
-                        }
+                        isBottomSheetPresented = false
                     },
                     onGetDirections: {
                         viewModel.getDirections()
-                        withAnimation {
-                            viewModel.deselectPharmacy()
-                        }
+                        isBottomSheetPresented = false
                     }
                 )
-                .transition(.move(edge: .bottom))
+                .presentationDetents([.height(geometry.size.height * 0.5)])
+                .presentationDragIndicator(.visible)
+            }
+        }
+    }
+
+    private var mapView: some View {
+        ZStack {
+            Map(
+                coordinateRegion: $viewModel.region,
+                showsUserLocation: true,
+                annotationItems: [viewModel.pinCoordinate].compactMap { coordinate in
+                    guard let coordinate = coordinate else { return nil }
+                    return IdentifiableCoordinate(coordinate: coordinate)
+                },
+                annotationContent: { (coordinateWrapper: IdentifiableCoordinate) in
+                    MapAnnotation(coordinate: coordinateWrapper.coordinate) {
+                        Image(systemName: "pills.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: viewModel.pinTapped ? 80 : 40, height: viewModel.pinTapped ? 80 : 40)
+                            .foregroundColor(.red)
+                            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0), value: viewModel.pinTapped)
+                            .onTapGesture {
+                                withAnimation {
+                                    viewModel.pinTapped.toggle()
+                                    viewModel.selectPharmacy()
+                                    isBottomSheetPresented = true
+                                }
+                            }
+                    }
+                }
+            )
+            .edgesIgnoringSafeArea(.all)
+
+            if let route = viewModel.route {
+                MapOverlay(route: route)
+                    .edgesIgnoringSafeArea(.all)
             }
         }
     }
