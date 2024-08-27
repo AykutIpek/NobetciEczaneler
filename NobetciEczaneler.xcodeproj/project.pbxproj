@@ -38,7 +38,6 @@
 		E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */; };
 		E9DD543A2C7873F00089DF84 /* PharmacyLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD54392C7873F00089DF84 /* PharmacyLocationView.swift */; };
 		E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */; };
-		E9DD543E2C78E42F0089DF84 /* MapRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +74,6 @@
 		E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		E9DD54392C7873F00089DF84 /* PharmacyLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyLocationView.swift; sourceTree = "<group>"; };
 		E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyLocationViewModel.swift; sourceTree = "<group>"; };
-		E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +87,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E90C340D2C7C9315000BB07C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9DD54392C7873F00089DF84 /* PharmacyLocationView.swift */,
+				E90C340B2C7B6049000BB07C /* BottomSheetView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E90C340F2C7C931C000BB07C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E90C34102C7C933C000BB07C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */,
+				E96AA8612C73587A00EA1316 /* PharmacyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E90C34112C7C9344000BB07C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E96AA8532C73587A00EA1316 = {
 			isa = PBXGroup;
 			children = (
@@ -134,9 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				E9DD54202C75FAC70089DF84 /* API */,
-				E9DD54302C77573E0089DF84 /* PharmacyViewState.swift */,
-				E96AA8612C73587A00EA1316 /* PharmacyView.swift */,
-				E96AA86F2C735BB100EA1316 /* PharmacyViewModel.swift */,
+				E90C34112C7C9344000BB07C /* ViewModel */,
+				E90C34102C7C933C000BB07C /* View */,
 			);
 			path = Pharmacy;
 			sourceTree = "<group>";
@@ -224,10 +255,8 @@
 		E9DD54382C7873D10089DF84 /* PharmacyLocation */ = {
 			isa = PBXGroup;
 			children = (
-				E9DD54392C7873F00089DF84 /* PharmacyLocationView.swift */,
-				E9DD543B2C78788D0089DF84 /* PharmacyLocationViewModel.swift */,
-				E9DD543D2C78E42F0089DF84 /* MapRouteView.swift */,
-				E90C340B2C7B6049000BB07C /* BottomSheetView.swift */,
+				E90C340F2C7C931C000BB07C /* ViewModel */,
+				E90C340D2C7C9315000BB07C /* View */,
 			);
 			path = PharmacyLocation;
 			sourceTree = "<group>";
@@ -313,7 +342,6 @@
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
-				E9DD543E2C78E42F0089DF84 /* MapRouteView.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Consts {
     static let turkishProvinces: [String] = [
@@ -21,4 +22,15 @@ struct Consts {
         "Siirt", "Sinop", "Sivas", "Şırnak", "Tekirdağ", "Tokat", "Trabzon", "Tunceli",
         "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak"
     ]
+    
+    static func callPharmacy(phone: String?) {
+        guard let phoneNumber = phone?.replacingOccurrences(of: " ", with: ""),
+              let phoneURL = URL(string: "tel://\(phoneNumber)"),
+              UIApplication.shared.canOpenURL(phoneURL) else {
+            return
+        }
+        UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+    }
+    
+    static let sheetCoordinateSpacer = "sheetCoordinateSpace"
 }

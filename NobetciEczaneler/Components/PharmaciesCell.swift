@@ -102,10 +102,7 @@ struct PharmaciesCell: View {
     private var callButton: some View {
         if let phone = viewModel.phone, phone.isNotEmpty {
             Button {
-                let tel = "tel://"
-                let formattedString = tel + phone
-                guard let url = URL(string: formattedString) else { return }
-                UIApplication.shared.open(url)
+                Consts.callPharmacy(phone: phone)
             } label: {
                 HStack {
                     HStack {

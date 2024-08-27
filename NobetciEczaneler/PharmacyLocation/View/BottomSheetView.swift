@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct BottomSheetView: View {
     let pharmacy: PharmacyModel
     let onDismiss: () -> Void
     let onGetDirections: () -> Void
-
+    
     var body: some View {
         VStack(spacing: 16) {
             HStack(alignment: .firstTextBaseline) {
@@ -19,10 +20,9 @@ struct BottomSheetView: View {
                     Text(pharmacy.name.orEmptyString)
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
                     Text("Eczane")
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
                 .padding(.horizontal)
                 Spacer()
@@ -33,7 +33,7 @@ struct BottomSheetView: View {
                         .padding(.trailing)
                 }
             }
-
+            
             HStack {
                 Button(action: onGetDirections) {
                     VStack {
@@ -47,10 +47,11 @@ struct BottomSheetView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
                     .cornerRadius(12)
-                }
-
-                Button(action: {
                     
+                }
+                
+                Button(action: {
+                    Consts.callPharmacy(phone: pharmacy.phone)
                 }) {
                     VStack {
                         Image(systemName: "phone.fill")
@@ -67,50 +68,41 @@ struct BottomSheetView: View {
             }
             .buttonStyle(PlainButtonStyle())
             .padding(.horizontal)
-
+            
             Divider()
-
-            // Details Section
+            
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Text("Ayrıntılar")
                         .font(.headline)
-                        .foregroundColor(.black)
                     Spacer()
                 }
-
-                // Contact info
+                
                 if let phone = pharmacy.phone {
                     HStack {
                         Text("Telefon:")
-                            .foregroundColor(.black)
                         Spacer()
                         Text(phone)
                             .foregroundColor(.blue)
-                            .multilineTextAlignment(.trailing)
                     }
                 }
-
-                // Address (supports multiline)
+                
                 if let address = pharmacy.address {
                     HStack(alignment: .top) {
                         Text("Adres:")
-                            .foregroundColor(.black)
                         Spacer()
                         Text(address)
-                            .foregroundColor(.black)
                             .multilineTextAlignment(.trailing)
-                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }
             .padding(.horizontal)
-
+            
             Spacer()
         }
-        .padding(.top, 24)
+        .padding(.top)
         .padding(.bottom, 20)
-        .background(Color.white)
+        .background(.white)
     }
 }
 
