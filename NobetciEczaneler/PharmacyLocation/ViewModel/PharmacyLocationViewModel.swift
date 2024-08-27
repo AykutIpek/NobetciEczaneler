@@ -29,6 +29,13 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
         onLoad()
     }
     
+    var mapAnnotationItems: [IdentifiableCoordinate] {
+        [pinCoordinate].compactMap { coordinate in
+            guard let coordinate = coordinate else { return nil }
+            return IdentifiableCoordinate(coordinate: coordinate)
+        }
+    }
+    
     func openInAppleMaps() {
         guard let destination = pinCoordinate else { return }
         let placemark = MKPlacemark(coordinate: destination)

@@ -17,7 +17,7 @@ struct IdentifiableCoordinate: Identifiable {
 struct PharmacyLocationView: View {
     @StateObject var viewModel: PharmacyLocationViewModel
     @State private var isBottomSheetPresented = false
-
+    
     var body: some View {
         GeometryReader { containingGeometry in
             ZStack {
@@ -32,42 +32,46 @@ struct PharmacyLocationView: View {
             }
         }
     }
-
+    
     private var mapView: some View {
         Map(
             coordinateRegion: $viewModel.region,
             showsUserLocation: true,
-            annotationItems: [viewModel.userLocation, viewModel.pinCoordinate].compactMap { coordinate in
-                guard let coordinate = coordinate else { return nil }
-                return IdentifiableCoordinate(coordinate: coordinate)
-            },
+            annotationItems: viewModel.mapAnnotationItems,
             annotationContent: { (coordinateWrapper: IdentifiableCoordinate) in
-                MapAnnotation(coordinate: coordinateWrapper.coordinate) {
-                    if let userLocation = viewModel.userLocation, viewModel.areCoordinatesEqual(coordinateWrapper.coordinate, userLocation) {
-                        Image(systemName: "location.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.blue)
-                    } else if let pinCoordinate = viewModel.pinCoordinate, viewModel.areCoordinatesEqual(coordinateWrapper.coordinate, pinCoordinate) {
-                        Image(systemName: "mappin.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: viewModel.pinTapped ? 60 : 40, height: viewModel.pinTapped ? 60 : 40)
-                            .foregroundColor(.red)
-                            .scaleEffect(viewModel.pinTapped ? 1.2 : 1.0)
-                            .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: viewModel.pinTapped)
-                            .onTapGesture {
-                                withAnimation {
-                                    viewModel.pinTapped.toggle()
-                                    isBottomSheetPresented = true
-                                }
-                            }
-                    }
-                }
+                annotationContent(coordinateWrapper: coordinateWrapper)
             }
         )
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func annotationContent(
+        coordinateWrapper: IdentifiableCoordinate
+    ) -> MapAnnotation<(some View)?> {
+        MapAnnotation(coordinate: coordinateWrapper.coordinate) {
+            if let pinCoordinate = viewModel.pinCoordinate, viewModel.areCoordinatesEqual(
+                coordinateWrapper.coordinate,
+                pinCoordinate
+            ) {
+                mapPinView
+            }
+        }
+    }
+    
+    private var mapPinView: some View {
+        Image(systemName: "mappin.circle.fill")
+            .resizable()
+            .scaledToFit()
+            .frame(width: viewModel.pinTapped ? 60 : 40, height: viewModel.pinTapped ? 60 : 40)
+            .foregroundColor(.red)
+            .scaleEffect(viewModel.pinTapped ? 1.2 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: viewModel.pinTapped)
+            .onTapGesture {
+                withAnimation {
+                    viewModel.pinTapped.toggle()
+                    isBottomSheetPresented = true
+                }
+            }
     }
     
     private func handleSheetView(_ containingGeometry: GeometryProxy) -> some View {
