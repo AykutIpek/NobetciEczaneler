@@ -20,7 +20,7 @@ struct BottomSheetView: View {
                     Text(pharmacy.name.orEmptyString)
                         .font(.title2)
                         .fontWeight(.bold)
-                    Text("Eczane")
+                    Text(LocalizableString.pharmacy.rawValue.localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -39,7 +39,7 @@ struct BottomSheetView: View {
                     VStack {
                         Image(systemName: "figure.walk")
                             .font(.title2)
-                        Text("Yön Tarifi Al")
+                        Text(LocalizableString.getDirection.rawValue.localized)
                             .font(.footnote)
                     }
                     .foregroundStyle(.white)
@@ -56,7 +56,7 @@ struct BottomSheetView: View {
                     VStack {
                         Image(systemName: "phone.fill")
                             .font(.title2)
-                        Text("Ara")
+                        Text(LocalizableString.call.rawValue.localized)
                             .font(.footnote)
                     }
                     .foregroundStyle(.gray)
@@ -73,14 +73,14 @@ struct BottomSheetView: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
-                    Text("Ayrıntılar")
+                    Text(LocalizableString.details.rawValue.localized)
                         .font(.headline)
                     Spacer()
                 }
                 
                 if let phone = pharmacy.phone {
                     HStack {
-                        Text("Telefon:")
+                        Text(LocalizableString.telephone.rawValue.localized)
                         Spacer()
                         Text(phone)
                             .foregroundColor(.blue)
@@ -89,7 +89,7 @@ struct BottomSheetView: View {
                 
                 if let address = pharmacy.address {
                     HStack(alignment: .top) {
-                        Text("Adres:")
+                        Text(LocalizableString.address.rawValue.localized)
                         Spacer()
                         Text(address)
                             .multilineTextAlignment(.trailing)

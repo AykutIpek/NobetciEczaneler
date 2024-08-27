@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -48,7 +46,7 @@ struct HomeView: View {
         MainCell(
             viewModel: MainCellViewModel(
                 systemImage: SystemImages.listBulletCircle.rawValue,
-                cellTitle: viewModel.provinceTitle,
+                cellTitle: LocalizableString.provinceTitle.rawValue.localized,
                 backgroundImage: .map,
                 color: [
                     Color.red,
@@ -64,7 +62,7 @@ struct HomeView: View {
         MainCell(
             viewModel: MainCellViewModel(
                 systemImage: SystemImages.locationCircle.rawValue,
-                cellTitle: viewModel.locationTitle,
+                cellTitle: LocalizableString.districtTitle.rawValue.localized,
                 backgroundImage: .pin,
                 color: [
                     Color.blue,

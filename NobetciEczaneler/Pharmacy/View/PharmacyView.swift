@@ -25,7 +25,7 @@ struct PharmacyView: View {
             }
             .disableBounces()
             .scrollIndicators(.hidden)
-            .navigationTitle("Nöbetçi Eczaneler")
+            .navigationTitle(LocalizableString.pharmaciesTitle.rawValue.localized)
             .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea(.container, edges: .bottom)
             .onLoad {
@@ -35,7 +35,7 @@ struct PharmacyView: View {
     }
     
     private var searchBar: some View {
-        TextField("Eczane Ara", text: $viewModel.searchText)
+        TextField(LocalizableString.searchPharmarcies.rawValue.localized, text: $viewModel.searchText)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.horizontal)
     }
@@ -53,8 +53,8 @@ struct PharmacyView: View {
     
     private var province: some View {
         DropdownView(
-            title: "İl",
-            prompt: "Seçiniz",
+            title: LocalizableString.province.rawValue.localized,
+            prompt: LocalizableString.select.rawValue.localized,
             options: Consts.turkishProvinces,
             selection: $viewModel.provinceSelected
         )
@@ -72,8 +72,8 @@ struct PharmacyView: View {
     
     private var district: some View {
         DropdownView(
-            title: "İlçe",
-            prompt: "Seçiniz",
+            title: LocalizableString.district.rawValue.localized,
+            prompt: LocalizableString.select.rawValue.localized,
             options: viewModel.districts,
             selection: $viewModel.districtSelected
         )
@@ -90,7 +90,7 @@ struct PharmacyView: View {
     private var pharmacyItems: some View {
         switch viewModel.state {
         case .loading:
-            ProgressView("Loading...")
+            ProgressView(LocalizableString.loading.rawValue.localized)
                 .padding(.top, 200)
         case .error(let errorMessage):
             Text(errorMessage)
@@ -111,7 +111,7 @@ struct PharmacyView: View {
             }
         case .loadedDistricts(let districts):
             if districts.isEmpty {
-                Text("No districts available.")
+                Text(LocalizableString.noDistrict.rawValue.localized)
                     .foregroundColor(.gray)
                     .padding()
             }
@@ -121,7 +121,7 @@ struct PharmacyView: View {
                     .font(.system(size: 80))
                     .foregroundStyle(.gray)
                 
-                Text("Bir Şehir Seçin")
+                Text(LocalizableString.selectProvince.rawValue.localized)
                     .font(.title2)
                     .foregroundStyle(.gray)
             }

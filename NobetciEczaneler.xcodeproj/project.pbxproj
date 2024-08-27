@@ -21,9 +21,9 @@
 		E96AA8802C73E2CB00EA1316 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA87F2C73E2CB00EA1316 /* MainCell.swift */; };
 		E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */; };
 		E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */; };
+		E96C71B32C7DFA0500F37A83 /* Enum+LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */; };
 		E9B3B7BB2C74C9650005F7FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B3B7B92C74C9650005F7FB /* Localizable.strings */; };
 		E9B3B7C32C74DD4C0005F7FB /* Enum+SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */; };
-		E9B3B7C62C74F4C70005F7FB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C52C74F4C70005F7FB /* HomeViewModel.swift */; };
 		E9B3B7C92C74F8BF0005F7FB /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */; };
 		E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */; };
 		E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7D42C75F0A70005F7FB /* Consts.swift */; };
@@ -56,10 +56,10 @@
 		E96AA87F2C73E2CB00EA1316 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellViewModel.swift; sourceTree = "<group>"; };
 		E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
+		E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+LocalizableString.swift"; sourceTree = "<group>"; };
 		E9B3B7BA2C74C9650005F7FB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B3B7BE2C74CAB30005F7FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+SystemImages.swift"; sourceTree = "<group>"; };
-		E9B3B7C52C74F4C70005F7FB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		E9B3B7D42C75F0A70005F7FB /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
@@ -195,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				E96AA87C2C73DF7C00EA1316 /* HomeView.swift */,
-				E9B3B7C52C74F4C70005F7FB /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -215,7 +214,7 @@
 		E96AA8832C74A4AE00EA1316 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */,
+				E96C71B12C7DF5CE00F37A83 /* Enum */,
 				E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */,
 				E9B3B7D42C75F0A70005F7FB /* Consts.swift */,
 				E9DD54252C77434B0089DF84 /* OptionalExtensions.swift */,
@@ -225,6 +224,15 @@
 				E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E96C71B12C7DF5CE00F37A83 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */,
+				E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		E9B3B7BF2C74CAC50005F7FB /* Localize */ = {
@@ -357,8 +365,8 @@
 				E96AA8802C73E2CB00EA1316 /* MainCell.swift in Sources */,
 				E9DD54262C77434B0089DF84 /* OptionalExtensions.swift in Sources */,
 				E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */,
+				E96C71B32C7DFA0500F37A83 /* Enum+LocalizableString.swift in Sources */,
 				E9B3B7C32C74DD4C0005F7FB /* Enum+SystemImages.swift in Sources */,
-				E9B3B7C62C74F4C70005F7FB /* HomeViewModel.swift in Sources */,
 				E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */,
 				E9DD543A2C7873F00089DF84 /* PharmacyLocationView.swift in Sources */,
 			);

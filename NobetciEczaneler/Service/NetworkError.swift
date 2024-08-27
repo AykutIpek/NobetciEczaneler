@@ -16,11 +16,11 @@ enum NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "Invalid URL."
+            return LocalizableString.invalidURL.rawValue.localized
         case .decodingFailed:
-            return "Failed to decode the response."
+            return LocalizableString.decodingFailed.rawValue.localized
         case .serverError(let statusCode):
-            return "Server returned an error with status code: \(statusCode)."
+            return "\(LocalizableString.serverError.rawValue.localized + statusCode.description)"
         case .custom(let errorMessage):
             return errorMessage
         }

@@ -110,7 +110,7 @@ struct PharmaciesCell: View {
                             .foregroundStyle(.blue)
                             .font(.largeTitle)
                         
-                        Text("Ara")
+                        Text(LocalizableString.call.rawValue.localized)
                             .foregroundStyle(.black)
                             .font(.subheadline)
                             .bold()
@@ -141,7 +141,7 @@ struct PharmaciesCell: View {
                     .foregroundStyle(.blue)
                     .font(.largeTitle)
                 
-                Text("Yol Tarifi")
+                Text(LocalizableString.directions.rawValue.localized)
                     .foregroundStyle(.black)
                     .font(.subheadline)
                     .bold()

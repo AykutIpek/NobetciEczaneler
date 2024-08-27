@@ -8,3 +8,21 @@
 
 "cellTitle" = "BY PROVINCE";
 "cellTitle2" = "CLOSEST PHARMACIES";
+"pharmaciesTitle" = "Pharmacies On Duty";
+"searchPharmarcies" = "Search Pharmacies";
+"province" = "Province";
+"select" = "Select";
+"district" = "District";
+"loading" = "Loading...";
+"noDistrict" = "No districts available";
+"selectProvince" = "Select Province";
+"pharmacy" = "Pharmacy";
+"getDirection" = "Get Directions";
+"call" = "Call";
+"details" = "Details";
+"telephone" = "Telephone:";
+"address" = "Adrress:";
+"directions" = "Directions";
+"invalidUrl" = "Invalid URL";
+"decodingFailed" = "Failed to decode the response";
+"serverError" = "Server returned an error with status code:";

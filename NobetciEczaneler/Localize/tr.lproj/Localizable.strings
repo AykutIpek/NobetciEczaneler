@@ -8,3 +8,21 @@
 
 "cellTitle" = "İLLERE GÖRE";
 "cellTitle2" = "YAKINIMDAKİLER";
+"pharmaciesTitle" = "Nöbetçi Eczaneler";
+"searchPharmarcies" = "Eczane Ara";
+"province" = "İl";
+"select" = "Seçiniz";
+"district" = "İlçe";
+"loading" = "Yükleniyor...";
+"noDistrict" = "İlçe mevcut değil";
+"selectProvince" = "Bir Şehir Seçin";
+"pharmacy" = "Eczane";
+"getDirection" = "Yön Tarifi Al";
+"call" = "Ara";
+"details" = "Ayrıntılar";
+"telephone" = "Telefon:";
+"address" = "Adres:";
+"directions" = "Yol Tarifi";
+"invalidUrl" = "Geçersiz URL";
+"decodingFailed" = "Response çözümlenemedi";
+"serverError" = "Sunucu durum koduyla bir hata döndürdü";

@@ -174,4 +174,13 @@ extension String {
     public static var whitespace: String {
         " "
     }
+    
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+    func localized(with arguments: CVarArg...) -> String {
+        let format = NSLocalizedString(self, comment: "")
+        return String(format: format, arguments: arguments)
+    }
 }
