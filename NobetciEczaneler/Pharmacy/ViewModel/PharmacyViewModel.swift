@@ -53,13 +53,8 @@ final class PharmacyViewModel: ObservableObject {
     }
     
     func convertToEnglishCharacters(text: String) -> String {
-        let turkishToEnglishMapping: [String: String] = [
-            "Ç": "C", "Ğ": "G", "İ": "I", "Ö": "O", "Ş": "S", "Ü": "U",
-            "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u"
-        ]
-        
         var convertedText = text
-        for (turkishChar, englishChar) in turkishToEnglishMapping {
+        for (turkishChar, englishChar) in Consts.turkishToEnglishMapping {
             convertedText = convertedText.replacingOccurrences(of: turkishChar, with: englishChar)
         }
         return convertedText

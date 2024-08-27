@@ -51,7 +51,7 @@ struct PharmaciesCell: View {
     private var cityText: some View {
         if let city = viewModel.city, city.isNotEmpty {
             HStack {
-                Image(systemName: "pin.fill")
+                Image(systemName: SystemImages.pinFill.rawValue)
                     .foregroundStyle(.red)
                 Text(city)
                     .foregroundStyle(.black)
@@ -64,7 +64,7 @@ struct PharmaciesCell: View {
     private var phoneText: some View {
         if let phone = viewModel.phone, phone.isNotEmpty {
             HStack {
-                Image(systemName: "phone.fill")
+                Image(systemName: SystemImages.phoneFill.rawValue)
                     .foregroundStyle(.red)
                 Text(phone)
                     .foregroundStyle(.black)
@@ -77,7 +77,7 @@ struct PharmaciesCell: View {
     private var addressText: some View {
         if let address = viewModel.address, address.isNotEmpty {
             HStack(alignment: .firstTextBaseline) {
-                Image(systemName: "location.fill")
+                Image(systemName: SystemImages.locationFill.rawValue)
                     .foregroundStyle(.red)
                 Text(address)
                     .foregroundStyle(.black)
@@ -106,7 +106,7 @@ struct PharmaciesCell: View {
             } label: {
                 HStack {
                     HStack {
-                        Image(systemName: "phone.circle.fill")
+                        Image(systemName: SystemImages.phoneCircleFill.rawValue)
                             .foregroundStyle(.blue)
                             .font(.largeTitle)
                         
@@ -137,7 +137,7 @@ struct PharmaciesCell: View {
             )
         } label: {
             HStack {
-                Image(systemName: "location.circle.fill")
+                Image(systemName: SystemImages.locationCircleFill.rawValue)
                     .foregroundStyle(.blue)
                     .font(.largeTitle)
                 

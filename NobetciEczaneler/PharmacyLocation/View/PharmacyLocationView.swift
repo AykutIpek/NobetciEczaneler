@@ -59,7 +59,7 @@ struct PharmacyLocationView: View {
     }
     
     private var mapPinView: some View {
-        Image(systemName: "mappin.circle.fill")
+        Image(systemName: SystemImages.mappinCircleFill.rawValue)
             .resizable()
             .scaledToFit()
             .frame(width: viewModel.pinTapped ? 60 : 40, height: viewModel.pinTapped ? 60 : 40)

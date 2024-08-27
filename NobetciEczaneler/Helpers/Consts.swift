@@ -33,4 +33,9 @@ struct Consts {
     }
     
     static let sheetCoordinateSpacer = "sheetCoordinateSpace"
+    
+    static let turkishToEnglishMapping: [String: String] = [
+        "Ç": "C", "Ğ": "G", "İ": "I", "Ö": "O", "Ş": "S", "Ü": "U",
+        "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u"
+    ]
 }

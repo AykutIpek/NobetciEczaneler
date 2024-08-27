@@ -27,7 +27,7 @@ struct BottomSheetView: View {
                 .padding(.horizontal)
                 Spacer()
                 Button(action: onDismiss) {
-                    Image(systemName: "xmark.circle.fill")
+                    Image(systemName: SystemImages.xmarkCircleFill.rawValue)
                         .font(.title2)
                         .foregroundColor(.gray)
                         .padding(.trailing)
@@ -37,7 +37,7 @@ struct BottomSheetView: View {
             HStack {
                 Button(action: onGetDirections) {
                     VStack {
-                        Image(systemName: "figure.walk")
+                        Image(systemName: SystemImages.figureWalk.rawValue)
                             .font(.title2)
                         Text(LocalizableString.getDirection.rawValue.localized)
                             .font(.footnote)
@@ -54,7 +54,7 @@ struct BottomSheetView: View {
                     Consts.callPharmacy(phone: pharmacy.phone)
                 }) {
                     VStack {
-                        Image(systemName: "phone.fill")
+                        Image(systemName: SystemImages.phoneFill.rawValue)
                             .font(.title2)
                         Text(LocalizableString.call.rawValue.localized)
                             .font(.footnote)

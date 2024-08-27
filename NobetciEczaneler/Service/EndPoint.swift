@@ -12,15 +12,15 @@ enum Endpoint {
     case districtList(province: String)
     
     var baseURL: String {
-        return "https://api.collectapi.com/health/"
+        return "https://api.collectapi.com/health"
     }
     
     var path: String {
         switch self {
         case .dutyPharmacy:
-            return "dutyPharmacy"
+            return "/dutyPharmacy"
         case .districtList:
-            return "districtList"
+            return "/districtList"
         }
     }
     

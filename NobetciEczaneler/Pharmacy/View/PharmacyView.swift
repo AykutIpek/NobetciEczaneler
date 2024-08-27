@@ -117,7 +117,7 @@ struct PharmacyView: View {
             }
         case .onLoad:
             VStack(spacing: 16) {
-                Image(systemName: "storefront.fill")
+                Image(systemName: SystemImages.storeFrontFill.rawValue)
                     .font(.system(size: 80))
                     .foregroundStyle(.gray)
                 
