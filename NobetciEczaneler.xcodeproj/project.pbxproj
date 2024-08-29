@@ -22,6 +22,7 @@
 		E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */; };
 		E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */; };
 		E96C71B32C7DFA0500F37A83 /* Enum+LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */; };
+		E9AEE43C2C807DAE008CBC9A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */; };
 		E9B3B7BB2C74C9650005F7FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B3B7B92C74C9650005F7FB /* Localizable.strings */; };
 		E9B3B7C32C74DD4C0005F7FB /* Enum+SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */; };
 		E9B3B7C92C74F8BF0005F7FB /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */; };
@@ -57,6 +58,7 @@
 		E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellViewModel.swift; sourceTree = "<group>"; };
 		E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+LocalizableString.swift"; sourceTree = "<group>"; };
+		E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		E9B3B7BA2C74C9650005F7FB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B3B7BE2C74CAB30005F7FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B3B7C22C74DD4C0005F7FB /* Enum+SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+SystemImages.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */,
+				E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
 				E9DD54332C7779890089DF84 /* View+Extension.swift in Sources */,
 				E9DD542E2C7753930089DF84 /* PharmaciesCellViewModel.swift in Sources */,
+				E9AEE43C2C807DAE008CBC9A /* LocationViewModel.swift in Sources */,
 				E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */,
 				E96AA8702C735BB200EA1316 /* PharmacyViewModel.swift in Sources */,
 				E90C340C2C7B6049000BB07C /* BottomSheetView.swift in Sources */,
