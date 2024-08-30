@@ -96,17 +96,6 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         onLoad()
     }
     
-    func onLoad() {
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        requestLocation()
-    }
-    
-    func requestLocation() {
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             self.location = location
@@ -116,5 +105,22 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
+    }
+    
+    func requestLocation() {
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.startUpdatingLocation()
+    }
+    
+    private func onLoad() {
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        requestLocation()
+    }
+}
+
+extension CLLocation {
+    func placemark(completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first, $1) }
     }
 }

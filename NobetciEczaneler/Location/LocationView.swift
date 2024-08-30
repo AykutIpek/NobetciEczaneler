@@ -21,7 +21,7 @@ struct LocationView: View {
                 Text(error)
                     .font(.caption)
                     .foregroundStyle(.red)
-            case .loaded(let array):
+            case .loaded( _):
                 content
             }
         }
