@@ -19,7 +19,6 @@ struct LocationView: View {
                 switch viewModel.state {
                 case .loading:
                     ProgressView("Loading...")
-                        .scaleEffect(1.5)
                 case .error(let error):
                     VStack {
                         Text("Error: \(error)")
@@ -29,7 +28,7 @@ struct LocationView: View {
                         
                         if error.contains("restricted") || error.contains("disabled") {
                             Button(action: {
-                                openSettings()
+                                viewModel.openSettings()
                             }) {
                                 Text("Open Settings")
                                     .font(.headline)
@@ -45,15 +44,7 @@ struct LocationView: View {
                         .edgesIgnoringSafeArea(.all)
                 }
             }
-            .navigationTitle("Nearby Pharmacies")
-            .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea(.container, edges: .bottom)
-        }
-    }
-    
-    private func openSettings() {
-        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
@@ -66,7 +57,7 @@ struct MapView: View {
     let pharmacies: [PharmacyModel]
     
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 39.9334, longitude: 32.8597), // Başlangıçta Ankara koordinatları, kullanıcı konumu alındığında değiştirilecek
+        center: CLLocationCoordinate2D(latitude: 39.9334, longitude: 32.8597),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
@@ -85,7 +76,6 @@ struct MapView: View {
         }
         .onAppear {
             if let location = locationManager.location {
-                // Kullanıcının mevcut konumunu başlangıç noktası olarak ayarlayın
                 region = MKCoordinateRegion(
                     center: location.coordinate,
                     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -94,7 +84,6 @@ struct MapView: View {
         }
         .onChange(of: locationManager.location) { newLocation in
             guard let newLocation = newLocation else { return }
-            // Konum güncellendiğinde haritada göster
             region = MKCoordinateRegion(
                 center: newLocation.coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)

@@ -122,4 +122,10 @@ final class LocationViewModel: ObservableObject {
         
         return .failure(.custom(errorMessage: "Request failed after 3 attempts."))
     }
+    
+    func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
 }
