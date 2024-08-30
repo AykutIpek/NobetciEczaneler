@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import MapKit
+import Combine
 import CoreLocation
 
 enum LocationViewState: Equatable {
@@ -18,19 +19,58 @@ enum LocationViewState: Equatable {
 
 final class LocationViewModel: ObservableObject {
     @Published var locationManager: LocationManager?
-    @Published var pharmacyModel: PharmacyModel?
     @Published var pharmacies: [PharmacyModel] = []
     @Published var state: LocationViewState = .loading
+    private var cancellables = Set<AnyCancellable>()
     
     init(locationManager: LocationManager? = LocationManager()) {
         self.locationManager = locationManager
-        onLoad()
+        monitorAuthorizationStatus()
     }
     
-    private func onLoad() {
-        locationManager?.requestLocation()
-        Task {
-            await loadPharmacies(district: "", province: "İzmir")
+    private func monitorAuthorizationStatus() {
+        locationManager?.$authorizationStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                guard let self = self else { return }
+                
+                switch status {
+                case .notDetermined:
+                    self.locationManager?.requestLocation()
+                case .restricted, .denied:
+                    self.state = .error("Location access is restricted. Please enable it in Settings.")
+                case .authorizedAlways, .authorizedWhenInUse:
+                    self.loadUserLocationAndFetchPharmacies()
+                case .none:
+                    self.state = .error("Location services are disabled. Please enable them in Settings.")
+                @unknown default:
+                    self.state = .error("Unexpected authorization status.")
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func loadUserLocationAndFetchPharmacies() {
+        locationManager?.location?.placemark { [weak self] placemark, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                self.state = .error("Failed to get location: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let placemark = placemark else {
+                self.state = .error("Failed to determine your location.")
+                return
+            }
+            
+            let district = placemark.locality ?? ""
+            let province = placemark.administrativeArea ?? "İzmir"
+            
+            Task { [weak self] in
+                guard let self = self else { return }
+                await self.loadPharmacies(district: district, province: province)
+            }
         }
     }
     
@@ -83,44 +123,5 @@ final class LocationViewModel: ObservableObject {
         }
         
         return .failure(.custom(errorMessage: "Request failed after 3 attempts."))
-    }
-}
-
-
-final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var location: CLLocation?
-    private let manager = CLLocationManager()
-    
-    override init() {
-        super.init()
-        onLoad()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            self.location = location
-            manager.stopUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get user location: \(error.localizedDescription)")
-    }
-    
-    func requestLocation() {
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-    }
-    
-    private func onLoad() {
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        requestLocation()
-    }
-}
-
-extension CLLocation {
-    func placemark(completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
-        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first, $1) }
     }
 }

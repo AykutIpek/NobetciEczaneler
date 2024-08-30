@@ -32,7 +32,7 @@ enum Endpoint {
     var headers: [String: String] {
         return [
             "content-type": "application/json",
-            "authorization": "apikey 7xVsNFn6fX7R6Yzh7TXB1o:2MTiHDeZFmswoQMPUprmB3"
+            "authorization": "apikey 2fvhoxmz94Ty4tjwBoLKfX:2LM1Yzab7V0GDl2Wv4zMzh"
         ]
     }
     
