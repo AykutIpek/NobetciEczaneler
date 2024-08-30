@@ -41,7 +41,7 @@ struct LocationView: View {
                         }
                     }
                 case .loaded(let pharmacies):
-                    MapView(pharmacies: pharmacies, userLocation: viewModel.locationManager?.location)
+                    MapView(pharmacies: pharmacies)
                         .edgesIgnoringSafeArea(.all)
                 }
             }
@@ -58,36 +58,73 @@ struct LocationView: View {
     }
 }
 
+
 struct MapView: View {
+    @StateObject private var locationManager = LocationManager()
+    @State private var selectedPharmacy: PharmacyModel?
+    
     let pharmacies: [PharmacyModel]
-    let userLocation: CLLocation?
     
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 39.9334, longitude: 32.8597), // Default to Ankara
+        center: CLLocationCoordinate2D(latitude: 39.9334, longitude: 32.8597), // Başlangıçta Ankara koordinatları, kullanıcı konumu alındığında değiştirilecek
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-
+    
     var body: some View {
-        Map(coordinateRegion: $region, annotationItems: pharmacies) { pharmacy in
+        Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: pharmacies) { pharmacy in
             MapAnnotation(coordinate: pharmacy.locationCoordinate) {
-                VStack {
-                    Image(systemName: "cross.circle.fill")
+                Button(action: {
+                    selectedPharmacy = pharmacy
+                }) {
+                    Image(systemName: "mappin.circle.fill")
                         .resizable()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 30, height: 30)
                         .foregroundColor(.red)
-                    Text(pharmacy.name ?? "Unknown")
-                        .font(.caption)
-                        .padding(5)
-                        .background(Color.white.opacity(0.7))
-                        .cornerRadius(8)
                 }
             }
         }
         .onAppear {
-            if let location = userLocation {
-                region.center = location.coordinate
+            if let location = locationManager.location {
+                // Kullanıcının mevcut konumunu başlangıç noktası olarak ayarlayın
+                region = MKCoordinateRegion(
+                    center: location.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
             }
         }
+        .onChange(of: locationManager.location) { newLocation in
+            guard let newLocation = newLocation else { return }
+            // Konum güncellendiğinde haritada göster
+            region = MKCoordinateRegion(
+                center: newLocation.coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            )
+        }
+        .sheet(item: $selectedPharmacy) { pharmacy in
+            VStack {
+                Text(pharmacy.name ?? "Unknown Pharmacy")
+                    .font(.title)
+                    .padding()
+                
+                Button(action: {
+                    openInAppleMaps(destination: pharmacy.locationCoordinate)
+                }) {
+                    Text("Get Directions")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+        }
+    }
+    
+    private func openInAppleMaps(destination: CLLocationCoordinate2D) {
+        let placemark = MKPlacemark(coordinate: destination)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = selectedPharmacy?.name
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
     }
 }
 

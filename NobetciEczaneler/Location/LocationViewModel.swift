@@ -41,9 +41,7 @@ final class LocationViewModel: ObservableObject {
                     self.state = .error("Location access is restricted. Please enable it in Settings.")
                 case .authorizedAlways, .authorizedWhenInUse:
                     self.loadUserLocationAndFetchPharmacies()
-                case .none:
-                    self.state = .error("Location services are disabled. Please enable them in Settings.")
-                @unknown default:
+                default:
                     self.state = .error("Unexpected authorization status.")
                 }
             }
