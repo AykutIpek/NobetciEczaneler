@@ -11,19 +11,17 @@ import MapKit
 import Combine
 import CoreLocation
 
+
 final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: CLLocation?
-    @Published var authorizationStatus: CLAuthorizationStatus?
-
     private let manager = CLLocationManager()
-
+    
     override init() {
         super.init()
         manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
+        checkAuthorizationStatus()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             DispatchQueue.main.async {
@@ -32,19 +30,32 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
             manager.stopUpdatingLocation()
         }
     }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        DispatchQueue.main.async {
-            self.authorizationStatus = status
-        }
-    }
-
-    func requestLocation() {
-        manager.startUpdatingLocation()
-    }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
+    }
+    
+    func checkAuthorizationStatus() {
+        let status = manager.authorizationStatus
+        handleAuthorizationStatus(status)
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        handleAuthorizationStatus(status)
+    }
+    
+    private func handleAuthorizationStatus(_ status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+        case .restricted, .denied:
+            print("Location access denied/restricted.")
+        @unknown default:
+            print("Unknown authorization status.")
+        }
     }
 }
 

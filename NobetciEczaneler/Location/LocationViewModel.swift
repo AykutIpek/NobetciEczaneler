@@ -29,27 +29,22 @@ final class LocationViewModel: ObservableObject {
     }
     
     private func monitorAuthorizationStatus() {
-        locationManager?.$authorizationStatus
+        locationManager?.$location
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] status in
+            .sink { [weak self] location in
                 guard let self = self else { return }
                 
-                switch status {
-                case .notDetermined:
-                    self.locationManager?.requestLocation()
-                case .restricted, .denied:
-                    self.state = .error("Location access is restricted. Please enable it in Settings.")
-                case .authorizedAlways, .authorizedWhenInUse:
-                    self.loadUserLocationAndFetchPharmacies()
-                default:
-                    self.state = .error("Unexpected authorization status.")
+                if let location = location {
+                    self.loadUserLocationAndFetchPharmacies(location: location)
+                } else {
+                    self.state = .error("Location services are disabled or restricted. Please enable them in Settings.")
                 }
             }
             .store(in: &cancellables)
     }
     
-    func loadUserLocationAndFetchPharmacies() {
-        locationManager?.location?.placemark { [weak self] placemark, error in
+    func loadUserLocationAndFetchPharmacies(location: CLLocation) {
+        location.placemark { [weak self] placemark, error in
             guard let self = self else { return }
             
             if let error = error {
