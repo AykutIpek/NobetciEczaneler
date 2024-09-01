@@ -58,41 +58,55 @@ struct MapView: View {
     let pharmacies: [PharmacyModel]
     
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 39.9334, longitude: 32.8597),
+        center: CLLocationCoordinate2D(latitude: 39.925533, longitude: 32.836991),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
     var body: some View {
-        GeometryReader { globalGeometry in
-            Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: pharmacies) { pharmacy in
-                MapAnnotation(coordinate: pharmacy.locationCoordinate) {
-                    Button(action: {
-                        selectedPharmacy = pharmacy
-                    }) {
-                        Image(systemName: "mappin.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.red)
-                    }
+        Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: pharmacies) { pharmacy in
+            MapAnnotation(coordinate: pharmacy.locationCoordinate) {
+                Button(action: {
+                    selectedPharmacy = pharmacy
+                }) {
+                    Image(systemName: "mappin.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.red)
                 }
             }
-            .onAppear {
-                if let location = locationManager.location {
-                    region = MKCoordinateRegion(
-                        center: location.coordinate,
-                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                    )
-                }
+        }
+        .onAppear {
+            if let location = locationManager.location {
+                region.center = location.coordinate
             }
-            .onChange(of: locationManager.location) { newLocation in
-                guard let newLocation = newLocation else { return }
+        }
+        .onChange(of: locationManager.location) { newLocation in
+            if let newLocation = newLocation {
                 region = MKCoordinateRegion(
                     center: newLocation.coordinate,
                     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                 )
             }
-            .sheet(item: $selectedPharmacy) { pharmacy in
-                handleSheetView(globalGeometry)
+        }
+        .onChange(of: selectedPharmacy) { _ in
+            if selectedPharmacy != nil {
+                isBottomSheetPresented = true
+            }
+        }
+        .sheet(isPresented: $isBottomSheetPresented, onDismiss: didDismissAction) {
+            if let pharmacy = selectedPharmacy {
+                BottomSheetView(
+                    pharmacy: pharmacy,
+                    onDismiss: {
+                        didDismissAction()
+                    },
+                    onGetDirections: {
+                        openInAppleMaps()
+                        isBottomSheetPresented = false
+                    }
+                )
+                .presentationDetents([.height(UIScreen.main.bounds.height * 0.4)])
+                .presentationDragIndicator(.visible)
             }
         }
     }
@@ -105,43 +119,9 @@ struct MapView: View {
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
     }
     
-    private func handleSheetView(_ containingGeometry: GeometryProxy) -> some View {
-        GeometryReader { geometry in
-            let frame = geometry.frame(in: .named("SheetCoordinateSpace"))
-            let globalFrame = containingGeometry.frame(in: .global)
-            let buffer = 5.0
-            
-            BottomSheetView(
-                pharmacy: selectedPharmacy ?? PharmacyModel(
-                    name: .empty,
-                    dist: .empty,
-                    address: .empty,
-                    phone: .empty,
-                    loc: .empty
-                ),
-                onDismiss: {
-                    didDismissAction()
-                },
-                onGetDirections: {
-                    openInAppleMaps()
-                    isBottomSheetPresented = false
-                }
-            )
-            .presentationDetents([.height(globalFrame.size.height * 0.5)])
-            .presentationDragIndicator(.visible)
-            .onChange(of: frame.origin.y) { newValue in
-                if newValue > globalFrame.maxY + buffer {
-                    didDismissAction()
-                }
-            }
-        }
-    }
-    
     private func didDismissAction() {
         isBottomSheetPresented = false
-        withAnimation {
-            selectedPharmacy = nil
-        }
+        selectedPharmacy = nil
     }
 }
 
