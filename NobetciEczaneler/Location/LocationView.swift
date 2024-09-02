@@ -18,7 +18,7 @@ struct LocationView: View {
             ZStack {
                 switch viewModel.state {
                 case .loading:
-                    ProgressView("Loading...")
+                    ProgressView(LocalizableString.loading.rawValue.localized)
                 case .error(let error):
                     VStack {
                         Text("Error: \(error)")
@@ -30,7 +30,7 @@ struct LocationView: View {
                             Button(action: {
                                 viewModel.openSettings()
                             }) {
-                                Text("Open Settings")
+                                Text(LocalizableString.openSettings.rawValue.localized)
                                     .font(.headline)
                                     .padding()
                                     .background(Color.blue)

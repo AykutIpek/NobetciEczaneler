@@ -22,6 +22,7 @@ struct MainCell: View {
                 Text(viewModel.cellTitle)
                     .font(.title3)
                     .foregroundStyle(.white)
+                    .multilineTextAlignment(.leading)
                     .bold()
                 Spacer()
             }

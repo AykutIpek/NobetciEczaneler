@@ -176,7 +176,7 @@ extension String {
     }
     
     var localized: String {
-        return NSLocalizedString(self, comment: "")
+        NSLocalizedString(self, bundle: .localizedBundle(), comment: "")
     }
     
     func localized(with arguments: CVarArg...) -> String {

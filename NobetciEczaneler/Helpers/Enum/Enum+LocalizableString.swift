@@ -30,4 +30,5 @@ enum LocalizableString: String {
     case invalidURL = "invalidUrl"
     case decodingFailed = "decodingFailed"
     case serverError = "serverError"
+    case openSettings = "openSettings"
 }

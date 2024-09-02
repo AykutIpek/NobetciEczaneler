@@ -26,3 +26,4 @@
 "invalidUrl" = "Invalid URL";
 "decodingFailed" = "Failed to decode the response";
 "serverError" = "Server returned an error with status code:";
+"openSettings" = "Open Settings";

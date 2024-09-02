@@ -22,6 +22,7 @@
 		E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */; };
 		E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */; };
 		E96C71B32C7DFA0500F37A83 /* Enum+LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */; };
+		E996C63C2C85A8B50042C693 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996C63B2C85A8B50042C693 /* LanguageManager.swift */; };
 		E9AEE43C2C807DAE008CBC9A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */; };
 		E9AEE43E2C823B2B008CBC9A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */; };
 		E9B3B7BB2C74C9650005F7FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B3B7B92C74C9650005F7FB /* Localizable.strings */; };
@@ -59,6 +60,7 @@
 		E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellViewModel.swift; sourceTree = "<group>"; };
 		E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+LocalizableString.swift"; sourceTree = "<group>"; };
+		E996C63B2C85A8B50042C693 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E9B3B7BA2C74C9650005F7FB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E96AA87C2C73DF7C00EA1316 /* HomeView.swift */,
+				E996C63B2C85A8B50042C693 /* LanguageManager.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				E9DD54312C77573E0089DF84 /* PharmacyViewState.swift in Sources */,
 				E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */,
 				E96AA87A2C73B1E800EA1316 /* NetworkError.swift in Sources */,
+				E996C63C2C85A8B50042C693 /* LanguageManager.swift in Sources */,
 				E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */,
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,

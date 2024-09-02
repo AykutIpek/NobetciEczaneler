@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var languageManager = LanguageManager()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -22,6 +24,27 @@ struct HomeView: View {
                 }
             }
             .ignoresSafeArea()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        languageManager.toggleLanguage()
+                    }) {
+                        Image(.translate)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                return
+            }
+            if let window = windowScene.windows.first {
+                window.rootViewController = UIHostingController(rootView: HomeView())
+                window.makeKeyAndVisible()
+            }
         }
     }
     
