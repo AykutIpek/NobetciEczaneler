@@ -66,7 +66,7 @@ struct PharmaciesCell: View {
             HStack {
                 Image(systemName: SystemImages.phoneFill.rawValue)
                     .foregroundStyle(.red)
-                Text(phone)
+                Text(Consts.formattedPhoneNumber(phone))
                     .foregroundStyle(.black)
                 Spacer()
             }
@@ -107,7 +107,7 @@ struct PharmaciesCell: View {
                 HStack {
                     HStack {
                         Image(systemName: SystemImages.phoneCircleFill.rawValue)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.green)
                             .font(.largeTitle)
                         
                         Text(LocalizableString.call.rawValue.localized)

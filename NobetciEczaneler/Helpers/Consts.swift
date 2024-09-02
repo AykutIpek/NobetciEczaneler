@@ -38,4 +38,14 @@ struct Consts {
         "Ç": "C", "Ğ": "G", "İ": "I", "Ö": "O", "Ş": "S", "Ü": "U",
         "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u"
     ]
+    
+    static func formattedPhoneNumber(_ phone: String) -> String {
+        guard phone.count >= 10 else { return phone }
+        let areaCode = phone.prefix(3)
+        let firstThree = phone.dropFirst(3).prefix(3)
+        let nextTwo = phone.dropFirst(6).prefix(2)
+        let remainingNumber = phone.dropFirst(8)
+        
+        return "+90 (\(areaCode)) \(firstThree) \(nextTwo) \(remainingNumber)"
+    }
 }

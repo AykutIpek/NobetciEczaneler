@@ -12,6 +12,16 @@ extension View {
     func disableBounces() -> some View {
         modifier(DisableBouncesModifier())
     }
+    
+    func hideKeyboardOnTap() -> some View {
+        self.onTapGesture {
+            hideKeyboard()
+        }
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 struct DisableBouncesModifier: ViewModifier {

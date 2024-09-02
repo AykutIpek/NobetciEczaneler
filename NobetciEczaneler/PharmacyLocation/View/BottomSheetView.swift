@@ -90,6 +90,7 @@ struct BottomSheetView: View {
                     .font(.title2)
                 Text(LocalizableString.call.rawValue.localized)
                     .font(.footnote)
+                    .padding(.top, 1)
             }
             .foregroundStyle(.gray)
             .padding(.vertical, 10)
@@ -122,7 +123,7 @@ struct BottomSheetView: View {
             HStack {
                 Text(LocalizableString.telephone.rawValue.localized)
                 Spacer()
-                Text(phone)
+                Text(Consts.formattedPhoneNumber(phone))
                     .foregroundColor(.blue)
             }
         }

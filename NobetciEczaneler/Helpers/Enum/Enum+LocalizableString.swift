@@ -31,4 +31,5 @@ enum LocalizableString: String {
     case decodingFailed = "decodingFailed"
     case serverError = "serverError"
     case openSettings = "openSettings"
+    case done = "done"
 }

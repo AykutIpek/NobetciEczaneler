@@ -22,6 +22,7 @@
 		E96AA8822C748F6100EA1316 /* MainCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */; };
 		E96AA8852C74A4C300EA1316 /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */; };
 		E96C71B32C7DFA0500F37A83 /* Enum+LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */; };
+		E98BB7052C864FE1007003B6 /* KeyboardToolbarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BB7042C864FE1007003B6 /* KeyboardToolbarModifier.swift */; };
 		E996C63C2C85A8B50042C693 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996C63B2C85A8B50042C693 /* LanguageManager.swift */; };
 		E9AEE43C2C807DAE008CBC9A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */; };
 		E9AEE43E2C823B2B008CBC9A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */; };
@@ -60,6 +61,7 @@
 		E96AA8812C748F6000EA1316 /* MainCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCellViewModel.swift; sourceTree = "<group>"; };
 		E96AA8842C74A4C300EA1316 /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		E96C71B22C7DFA0500F37A83 /* Enum+LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+LocalizableString.swift"; sourceTree = "<group>"; };
+		E98BB7042C864FE1007003B6 /* KeyboardToolbarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarModifier.swift; sourceTree = "<group>"; };
 		E996C63B2C85A8B50042C693 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				E9DD54292C7745460089DF84 /* AnyOptional.swift */,
 				E9DD54322C7779890089DF84 /* View+Extension.swift */,
 				E9DD54342C77C8FD0089DF84 /* ViewDidLoadModifier.swift */,
+				E98BB7042C864FE1007003B6 /* KeyboardToolbarModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
+				E98BB7052C864FE1007003B6 /* KeyboardToolbarModifier.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
 				E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,

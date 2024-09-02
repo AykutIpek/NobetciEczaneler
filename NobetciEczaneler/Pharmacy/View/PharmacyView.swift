@@ -31,12 +31,14 @@ struct PharmacyView: View {
             .onLoad {
                 viewModel.state = .onLoad
             }
+            .hideKeyboardOnTap()
         }
     }
     
     private var searchBar: some View {
         TextField(LocalizableString.searchPharmarcies.rawValue.localized, text: $viewModel.searchText)
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            .keyboardToolbar()
     }
     
     private var boxArea: some View {

@@ -27,3 +27,4 @@
 "decodingFailed" = "Response çözümlenemedi";
 "serverError" = "Sunucu durum koduyla bir hata döndürdü";
 "openSettings" = "Ayarları Aç";
+"done" = "Bitti";
