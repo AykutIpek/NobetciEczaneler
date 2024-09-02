@@ -37,7 +37,6 @@ struct PharmacyView: View {
     private var searchBar: some View {
         TextField(LocalizableString.searchPharmarcies.rawValue.localized, text: $viewModel.searchText)
             .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding(.horizontal)
     }
     
     private var boxArea: some View {
@@ -47,8 +46,8 @@ struct PharmacyView: View {
                 province
                 district
             }
-            .padding(.horizontal, sizeClass == .compact ? 16 : 64)
         }
+        .padding(.horizontal, sizeClass == .compact ? 16 : 64)
     }
     
     private var province: some View {

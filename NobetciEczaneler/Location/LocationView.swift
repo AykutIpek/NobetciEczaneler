@@ -14,7 +14,7 @@ struct LocationView: View {
     @StateObject private var viewModel = LocationViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 switch viewModel.state {
                 case .loading:
