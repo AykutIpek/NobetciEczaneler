@@ -71,14 +71,12 @@ final class PharmacyLocationViewModel: NSObject, ObservableObject, CLLocationMan
     private func setPinCoordinate(from location: String?) {
         guard let location = location else { return }
         let components = location.split(separator: ",").compactMap { Double($0.trimmingCharacters(in: .whitespaces)) }
-        
-        if components.count == 2 {
-            let coordinate = CLLocationCoordinate2D(latitude: components[0], longitude: components[1])
-            pinCoordinate = coordinate
-            region = MKCoordinateRegion(
-                center: coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-            )
-        }
+        guard components.count == 2 else { return }
+        let coordinate = CLLocationCoordinate2D(latitude: components[0], longitude: components[1])
+        pinCoordinate = coordinate
+        region = MKCoordinateRegion(
+            center: coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        )
     }
 }

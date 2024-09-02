@@ -242,6 +242,30 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		E996C63D2C85CD7F0042C693 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E996C63E2C85CD830042C693 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E996C63F2C85CD8F0042C693 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		E9B3B7BF2C74CAC50005F7FB /* Localize */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,9 +277,9 @@
 		E9B3B7C72C74F8910005F7FB /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				E9B3B7C82C74F8BF0005F7FB /* LocationView.swift */,
-				E9AEE43B2C807DAE008CBC9A /* LocationViewModel.swift */,
-				E9AEE43D2C823B2B008CBC9A /* LocationManager.swift */,
+				E996C63D2C85CD7F0042C693 /* View */,
+				E996C63E2C85CD830042C693 /* ViewModel */,
+				E996C63F2C85CD8F0042C693 /* Manager */,
 			);
 			path = Location;
 			sourceTree = "<group>";
