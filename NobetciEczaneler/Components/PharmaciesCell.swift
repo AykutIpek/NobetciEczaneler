@@ -126,7 +126,7 @@ struct PharmaciesCell: View {
         NavigationLink {
             PharmacyLocationView(
                 viewModel: PharmacyLocationViewModel(
-                    PharmacyModel(
+                    pharmacy: PharmacyModel(
                         name: viewModel.pharmacies,
                         dist: viewModel.city,
                         address: viewModel.address,

@@ -117,7 +117,7 @@ struct PharmacyLocationView: View {
 #Preview {
     PharmacyLocationView(
         viewModel: PharmacyLocationViewModel(
-            PharmacyModel(
+            pharmacy: PharmacyModel(
                 id: UUID(),
                 name: "Akkaya Eczanesi",
                 dist: "İzmir",

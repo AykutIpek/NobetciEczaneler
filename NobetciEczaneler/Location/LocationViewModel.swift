@@ -18,32 +18,30 @@ enum LocationViewState: Equatable {
 }
 
 final class LocationViewModel: ObservableObject {
-    @Published var locationManager: LocationManager?
     @Published var pharmacies: [PharmacyModel] = []
     @Published var state: LocationViewState = .loading
     private var cancellables = Set<AnyCancellable>()
+    private let locationManager: LocationManager
     
-    init(locationManager: LocationManager? = LocationManager()) {
+    init(locationManager: LocationManager = LocationManager()) {
         self.locationManager = locationManager
         monitorAuthorizationStatus()
     }
     
     private func monitorAuthorizationStatus() {
-        locationManager?.$location
+        locationManager.$location
             .receive(on: DispatchQueue.main)
             .sink { [weak self] location in
-                guard let self = self else { return }
-                
-                if let location = location {
-                    self.loadUserLocationAndFetchPharmacies(location: location)
-                } else {
-                    self.state = .error("Location services are disabled or restricted. Please enable them in Settings.")
+                guard let self = self, let location = location else {
+                    self?.state = .error("Location services are disabled or restricted. Please enable them in Settings.")
+                    return
                 }
+                self.loadUserLocationAndFetchPharmacies(location: location)
             }
             .store(in: &cancellables)
     }
     
-    func loadUserLocationAndFetchPharmacies(location: CLLocation) {
+    private func loadUserLocationAndFetchPharmacies(location: CLLocation) {
         location.placemark { [weak self] placemark, error in
             guard let self = self else { return }
             
@@ -61,19 +59,15 @@ final class LocationViewModel: ObservableObject {
             let province = placemark.administrativeArea ?? "İzmir"
             
             Task { [weak self] in
-                guard let self = self else { return }
-                await self.loadPharmacies(district: district, province: province)
+                await self?.loadPharmacies(district: district, province: province)
             }
         }
     }
     
     @MainActor
-    func loadPharmacies(district: String, province: String) async {
+    private func loadPharmacies(district: String, province: String) async {
         state = .loading
-        
-        let result = await performRequestWithRetry { [weak self] in
-            await self?.fetchPharmacies(district: district, province: province) ?? .failure(.custom(errorMessage: "Unexpected error"))
-        }
+        let result = await fetchPharmacies(district: district, province: province)
         
         switch result {
         case .success(let pharmacies):
@@ -94,28 +88,6 @@ final class LocationViewModel: ObservableObject {
         case .failure(let error):
             return .failure(error)
         }
-    }
-    
-    private func performRequestWithRetry<T>(request: @escaping () async -> Result<T, NetworkError>) async -> Result<T, NetworkError> {
-        var attempt = 0
-        
-        while attempt < 3 {
-            let result = await request()
-            
-            switch result {
-            case .success:
-                return result
-            case .failure(let error):
-                if case .serverError(let statusCode) = error, statusCode == 429 {
-                    attempt += 1
-                    try? await Task.sleep(nanoseconds: 1_000_000)
-                } else {
-                    return result
-                }
-            }
-        }
-        
-        return .failure(.custom(errorMessage: "Request failed after 3 attempts."))
     }
     
     func openSettings() {

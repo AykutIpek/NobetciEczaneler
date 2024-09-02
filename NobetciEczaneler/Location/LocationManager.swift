@@ -36,13 +36,11 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
     }
     
     func checkAuthorizationStatus() {
-        let status = manager.authorizationStatus
-        handleAuthorizationStatus(status)
+        handleAuthorizationStatus(manager.authorizationStatus)
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        let status = manager.authorizationStatus
-        handleAuthorizationStatus(status)
+        handleAuthorizationStatus(manager.authorizationStatus)
     }
     
     private func handleAuthorizationStatus(_ status: CLAuthorizationStatus) {
