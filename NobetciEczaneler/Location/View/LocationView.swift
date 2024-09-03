@@ -116,7 +116,7 @@ struct MapView: View {
         let placemark = MKPlacemark(coordinate: destination)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = selectedPharmacy?.name
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
     }
     
     private func didDismissAction() {
