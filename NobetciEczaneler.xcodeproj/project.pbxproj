@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E90C340C2C7B6049000BB07C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C340B2C7B6049000BB07C /* BottomSheetView.swift */; };
+		E96887AF2C889B0000A0A8AD /* CityPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96887AE2C889B0000A0A8AD /* CityPickerSheet.swift */; };
 		E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */; };
 		E96AA8622C73587A00EA1316 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8612C73587A00EA1316 /* PharmacyView.swift */; };
 		E96AA8642C73587C00EA1316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96AA8632C73587C00EA1316 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		E90C340B2C7B6049000BB07C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		E96887AE2C889B0000A0A8AD /* CityPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPickerSheet.swift; sourceTree = "<group>"; };
 		E96AA85C2C73587A00EA1316 /* NobetciEczaneler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NobetciEczaneler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobetciEczanelerApp.swift; sourceTree = "<group>"; };
 		E96AA8612C73587A00EA1316 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				E9B3B7CC2C752EB00005F7FB /* DropdownView.swift */,
 				E9DD54232C7639020089DF84 /* PharmaciesCell.swift */,
 				E9DD542D2C7753930089DF84 /* PharmaciesCellViewModel.swift */,
+				E96887AE2C889B0000A0A8AD /* CityPickerSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				E9DD543C2C78788D0089DF84 /* PharmacyLocationViewModel.swift in Sources */,
 				E96AA8732C735C4300EA1316 /* Service.swift in Sources */,
 				E9DD54332C7779890089DF84 /* View+Extension.swift in Sources */,
+				E96887AF2C889B0000A0A8AD /* CityPickerSheet.swift in Sources */,
 				E9DD542E2C7753930089DF84 /* PharmaciesCellViewModel.swift in Sources */,
 				E9AEE43C2C807DAE008CBC9A /* LocationViewModel.swift in Sources */,
 				E96AA87D2C73DF7C00EA1316 /* HomeView.swift in Sources */,
