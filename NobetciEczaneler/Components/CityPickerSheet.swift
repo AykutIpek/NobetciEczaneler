@@ -20,7 +20,7 @@ struct CityPickerSheet: View {
                 }
                 .foregroundColor(.red)
                 Spacer()
-                Button("Tamam") {
+                Button(LocalizableString.done.rawValue.localized) {
                     onDismiss()
                 }
                 .foregroundColor(.red)
