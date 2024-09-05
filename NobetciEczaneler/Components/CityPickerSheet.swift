@@ -8,32 +8,44 @@
 import SwiftUI
 
 struct CityPickerSheet: View {
-    @Binding var selectedCity: String
+    @Binding var selectedCity: String?
+    @State private var tempSelectedCity: String?
     let cities: [String]
-    let onDismiss: () -> Void
-    
+    let onDismiss: (String?) -> Void
+
+    init(selectedCity: Binding<String?>, cities: [String], onDismiss: @escaping (String?) -> Void) {
+        self._selectedCity = selectedCity
+        self._tempSelectedCity = State(initialValue: selectedCity.wrappedValue)
+        self.cities = cities
+        self.onDismiss = onDismiss
+    }
+
     var body: some View {
         VStack {
             HStack {
                 Button("İptal") {
-                    onDismiss()
+                    onDismiss(selectedCity)
                 }
                 .foregroundColor(.red)
                 Spacer()
                 Button(LocalizableString.done.rawValue.localized) {
-                    onDismiss()
+                    onDismiss(tempSelectedCity)
                 }
                 .foregroundColor(.red)
             }
-            .padding()
-            
-            Picker(selection: $selectedCity, label: Text("Select City")) {
+            .padding(.horizontal)
+
+            Picker("Select City", selection: $tempSelectedCity) {
                 ForEach(cities, id: \.self) { city in
                     Text(city)
-                        .tag(city)
+                        .tag(city as String?)
                 }
             }
-            .pickerStyle(WheelPickerStyle())
+            .pickerStyle(.wheel)
+            .onAppear {
+                tempSelectedCity = selectedCity
+            }
+            .frame(maxHeight: 200)
         }
         .background(Color.white)
         .cornerRadius(10)
@@ -44,7 +56,7 @@ struct CityPickerSheet: View {
     CityPickerSheet(
         selectedCity: .constant("İzmir"),
         cities: Consts.turkishProvinces
-    ) {
+    ) { _ in
         //
     }
 }

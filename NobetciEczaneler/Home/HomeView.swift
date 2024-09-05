@@ -76,7 +76,7 @@ struct HomeView: View {
                     Color.red.opacity(0.8),
                     Color.red.opacity(0.6)
                 ],
-                destinationView: PharmacyView()
+                destinationView: CityChangeView()
             )
         )
     }

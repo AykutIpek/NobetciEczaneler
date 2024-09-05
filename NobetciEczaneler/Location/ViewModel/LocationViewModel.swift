@@ -36,7 +36,7 @@ final class LocationViewModel: ObservableObject {
                     self?.state = .error("Location services are disabled or restricted. Please enable them in Settings.")
                     return
                 }
-                self.loadUserLocationAndFetchPharmacies(location: location)
+                loadUserLocationAndFetchPharmacies(location: location)
             }
             .store(in: &cancellables)
     }
@@ -46,12 +46,12 @@ final class LocationViewModel: ObservableObject {
             guard let self = self else { return }
             
             if let error = error {
-                self.state = .error("Failed to get location: \(error.localizedDescription)")
+                state = .error("Failed to get location: \(error.localizedDescription)")
                 return
             }
             
             guard let placemark = placemark else {
-                self.state = .error("Failed to determine your location.")
+                state = .error("Failed to determine your location.")
                 return
             }
             

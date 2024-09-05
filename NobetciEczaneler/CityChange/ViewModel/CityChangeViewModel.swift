@@ -1,5 +1,5 @@
 //
-//  PharmacyViewModel.swift
+//  CityChangeViewModel.swift
 //  NobetciEczaneler
 //
 //  Created by aykut ipek on 19.08.2024.
@@ -10,17 +10,15 @@ import SwiftUI
 import Combine
 
 
-final class PharmacyViewModel: ObservableObject {
+final class CityChangeViewModel: ObservableObject {
     @Published var pharmacies: [PharmacyModel] = []
     @Published var filteredPharmacies: [PharmacyModel] = []
     @Published var districts: [String] = []
     @Published var provinceSelected: String?
     @Published var districtSelected: String?
     @Published var searchText: String = ""
-    @Published var state: PharmacyViewState = .loading
+    @Published var state: CityChangeState = .loading
     private var cancellables: Set<AnyCancellable> = []
-    private let retryLimit = 3
-    private let retryDelay: UInt64 = 1_000_000_000
     
     init() {
         $searchText
@@ -121,7 +119,7 @@ final class PharmacyViewModel: ObservableObject {
     private func performRequestWithRetry<T>(request: @escaping () async -> Result<T, NetworkError>) async -> Result<T, NetworkError> {
         var attempt = 0
         
-        while attempt < retryLimit {
+        while attempt < 3 {
             let result = await request()
             
             switch result {
@@ -130,13 +128,13 @@ final class PharmacyViewModel: ObservableObject {
             case .failure(let error):
                 if case .serverError(let statusCode) = error, statusCode == 429 {
                     attempt += 1
-                    try? await Task.sleep(nanoseconds: retryDelay)
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                 } else {
                     return result
                 }
             }
         }
         
-        return .failure(.custom(errorMessage: "Request failed after \(retryLimit) attempts."))
+        return .failure(.custom(errorMessage: "Request failed after \(3) attempts."))
     }
 }

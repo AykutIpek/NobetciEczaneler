@@ -1,5 +1,5 @@
 //
-//  PharmacyView.swift
+//  CityChangeView.swift
 //  NobetciEczaneler
 //
 //  Created by aykut ipek on 19.08.2024.
@@ -7,24 +7,18 @@
 
 import SwiftUI
 
-struct PharmacyView: View {
-    @StateObject private var viewModel = PharmacyViewModel()
+struct CityChangeView: View {
+    @StateObject private var viewModel = CityChangeViewModel()
     @Environment(\.horizontalSizeClass) var sizeClass
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                ZStack(alignment: .top) {
-                    VStack(spacing: 16) {
-                        pharmacyItems
-                        Spacer()
-                    }
-                    .padding(.top, 120)
-                    boxArea
-                }
+            VStack(spacing: 16) {
+                boxArea
+                pharmacyItems
+                Spacer()
             }
-            .disableBounces()
-            .scrollIndicators(.hidden)
+            .padding(.horizontal)
             .navigationTitle(LocalizableString.pharmaciesTitle.rawValue.localized)
             .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea(.container, edges: .bottom)
@@ -44,12 +38,11 @@ struct PharmacyView: View {
     private var boxArea: some View {
         VStack {
             searchBar
-            HStack(alignment: .top) {
+            HStack(alignment: .top, spacing: 16) {
                 province
                 district
             }
         }
-        .padding(.horizontal, sizeClass == .compact ? 16 : 64)
     }
     
     private var province: some View {
@@ -98,17 +91,19 @@ struct PharmacyView: View {
                 .foregroundColor(.red)
                 .padding(.top, 150)
         case .loaded:
-            ForEach(viewModel.filteredPharmacies, id: \.self) { pharmacy in
-                PharmaciesCell(
-                    viewModel: PharmaciesCellViewModel(
-                        pharmacies: pharmacy.name.orEmptyString,
-                        city: pharmacy.dist.orEmptyString,
-                        phone: pharmacy.phone.orEmptyString,
-                        address: pharmacy.address.orEmptyString,
-                        location: pharmacy.loc.orEmptyString
+            ScrollView {
+                ForEach(viewModel.filteredPharmacies, id: \.self) { pharmacy in
+                    PharmaciesCell(
+                        viewModel: PharmaciesCellViewModel(
+                            pharmacies: pharmacy.name.orEmptyString,
+                            city: pharmacy.dist.orEmptyString,
+                            phone: pharmacy.phone.orEmptyString,
+                            address: pharmacy.address.orEmptyString,
+                            location: pharmacy.loc.orEmptyString
+                        )
                     )
-                )
-                .padding(.horizontal, sizeClass == .compact ? .zero : 48)
+                    .padding(.horizontal, sizeClass == .compact ? 1 : 48)
+                }
             }
         case .loadedDistricts(let districts):
             if districts.isEmpty {
@@ -133,5 +128,5 @@ struct PharmacyView: View {
 
 
 #Preview {
-    PharmacyView()
+    CityChangeView()
 }
