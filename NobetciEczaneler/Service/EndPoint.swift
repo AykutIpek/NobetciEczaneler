@@ -28,12 +28,17 @@ enum Endpoint {
         return baseURL + path
     }
     
-
     var headers: [String: String] {
-        return [
-            "content-type": "application/json",
-            "authorization": "apikey 2fvhoxmz94Ty4tjwBoLKfX:2LM1Yzab7V0GDl2Wv4zMzh"
-        ]
+        do {
+            let apiKey: String = try Configuration.value(for: "API_KEY")
+            return [
+                "content-type": "application/json",
+                "authorization": apiKey
+            ]
+        } catch {
+            print("Error fetching API key: \(error)")
+            return [:]
+        }
     }
     
     func urlRequest() -> URLRequest? {

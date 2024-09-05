@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E90C340C2C7B6049000BB07C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C340B2C7B6049000BB07C /* BottomSheetView.swift */; };
 		E96887AF2C889B0000A0A8AD /* CityPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96887AE2C889B0000A0A8AD /* CityPickerSheet.swift */; };
+		E96887C32C8A4CF200A0A8AD /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96887C22C8A4CF200A0A8AD /* Configuration.swift */; };
 		E96AA8602C73587A00EA1316 /* NobetciEczanelerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */; };
 		E96AA8622C73587A00EA1316 /* CityChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96AA8612C73587A00EA1316 /* CityChangeView.swift */; };
 		E96AA8642C73587C00EA1316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96AA8632C73587C00EA1316 /* Assets.xcassets */; };
@@ -48,6 +49,9 @@
 /* Begin PBXFileReference section */
 		E90C340B2C7B6049000BB07C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		E96887AE2C889B0000A0A8AD /* CityPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPickerSheet.swift; sourceTree = "<group>"; };
+		E96887BD2C8A49BA00A0A8AD /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		E96887C22C8A4CF200A0A8AD /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		E96887C42C8A514F00A0A8AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96AA85C2C73587A00EA1316 /* NobetciEczaneler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NobetciEczaneler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobetciEczanelerApp.swift; sourceTree = "<group>"; };
 		E96AA8612C73587A00EA1316 /* CityChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityChangeView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		E96AA85E2C73587A00EA1316 /* NobetciEczaneler */ = {
 			isa = PBXGroup;
 			children = (
+				E96887C42C8A514F00A0A8AD /* Info.plist */,
 				E96AA8652C73587C00EA1316 /* Preview Content */,
 				E96AA86E2C735B5700EA1316 /* App */,
 				E9B3B7BF2C74CAC50005F7FB /* Localize */,
@@ -187,6 +192,8 @@
 			children = (
 				E96AA85F2C73587A00EA1316 /* NobetciEczanelerApp.swift */,
 				E96AA8632C73587C00EA1316 /* Assets.xcassets */,
+				E96887BD2C8A49BA00A0A8AD /* Secrets.xcconfig */,
+				E96887C22C8A4CF200A0A8AD /* Configuration.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -390,6 +397,7 @@
 				E9DD54352C77C8FD0089DF84 /* ViewDidLoadModifier.swift in Sources */,
 				E96AA8622C73587A00EA1316 /* CityChangeView.swift in Sources */,
 				E9B3B7CD2C752EB00005F7FB /* DropdownView.swift in Sources */,
+				E96887C32C8A4CF200A0A8AD /* Configuration.swift in Sources */,
 				E9B3B7D52C75F0A70005F7FB /* Consts.swift in Sources */,
 				E98BB7052C864FE1007003B6 /* KeyboardToolbarModifier.swift in Sources */,
 				E96AA8762C735D1A00EA1316 /* PharmacyModel.swift in Sources */,
@@ -552,6 +560,7 @@
 		};
 		E96AA86B2C73587C00EA1316 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E96887BD2C8A49BA00A0A8AD /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -561,6 +570,7 @@
 				DEVELOPMENT_TEAM = 5Z6579228A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NobetciEczaneler/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Konumunuza erişmek istiyoruz";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -585,6 +595,7 @@
 		};
 		E96AA86C2C73587C00EA1316 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E96887BD2C8A49BA00A0A8AD /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -594,6 +605,7 @@
 				DEVELOPMENT_TEAM = 5Z6579228A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NobetciEczaneler/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Konumunuza erişmek istiyoruz";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
