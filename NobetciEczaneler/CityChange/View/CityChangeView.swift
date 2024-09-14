@@ -12,20 +12,33 @@ struct CityChangeView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 16) {
-                boxArea
-                pharmacyItems
-                Spacer()
+        GeometryReader { _ in
+            NavigationStack {
+                VStack(spacing: 16) {
+                    boxArea
+                    pharmacyItems
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .navigationTitle(LocalizableString.pharmaciesTitle.rawValue.localized)
+                .navigationBarTitleDisplayMode(.inline)
+                .ignoresSafeArea(.container, edges: .bottom)
+                .onLoad {
+                    viewModel.state = .onLoad
+                }
+                .hideKeyboardOnTap()
             }
-            .padding(.horizontal)
-            .navigationTitle(LocalizableString.pharmaciesTitle.rawValue.localized)
-            .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea(.container, edges: .bottom)
-            .onLoad {
-                viewModel.state = .onLoad
+        }
+    }
+    
+    private var boxArea: some View {
+        VStack {
+            searchBar
+            searchCityBar
+            HStack(alignment: .top, spacing: 16) {
+                province
+                district
             }
-            .hideKeyboardOnTap()
         }
     }
     
@@ -35,14 +48,9 @@ struct CityChangeView: View {
             .keyboardToolbar()
     }
     
-    private var boxArea: some View {
-        VStack {
-            searchBar
-            HStack(alignment: .top, spacing: 16) {
-                province
-                district
-            }
-        }
+    private var searchCityBar: some View {
+        TextField("Şehir Ara", text: $viewModel.searchCityText)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
     }
     
     private var province: some View {

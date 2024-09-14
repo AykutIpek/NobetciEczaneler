@@ -17,15 +17,28 @@ final class CityChangeViewModel: ObservableObject {
     @Published var provinceSelected: String?
     @Published var districtSelected: String?
     @Published var searchText: String = ""
+    @Published var searchCityText: String = ""
     @Published var state: CityChangeState = .loading
     private var cancellables: Set<AnyCancellable> = []
     
     init() {
         $searchText
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .removeDuplicates()
             .sink { [weak self] newSearchText in
-                self?.searchText = newSearchText
-                self?.filterPharmacies()
+                guard let self = self else { return }
+                searchText = newSearchText
+                filterPharmacies()
+            }
+            .store(in: &cancellables)
+        
+        $searchCityText
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] newSearchText in
+                guard let self = self else { return }
+                searchCityText = newSearchText
+                filterCities()
             }
             .store(in: &cancellables)
     }
@@ -76,13 +89,26 @@ final class CityChangeViewModel: ObservableObject {
     }
     
     private func filterPharmacies() {
-        if searchText.isEmpty {
+        guard searchText.isNotEmpty else {
             filteredPharmacies = pharmacies
-        } else {
-            filteredPharmacies = pharmacies.filter { pharmacy in
-                let name = pharmacy.name?.lowercased() ?? ""
-                return name.contains(searchText.lowercased())
-            }
+            return
+        }
+        
+        filteredPharmacies = pharmacies.filter { pharmacy in
+            let name = pharmacy.name?.lowercased() ?? ""
+            return name.contains(searchText.lowercased())
+        }
+    }
+    
+    private func filterCities() {
+        guard searchCityText.isNotEmpty else {
+            filteredPharmacies = pharmacies
+            return
+        }
+        
+        filteredPharmacies = pharmacies.filter { pharmacy in
+            let name = pharmacy.dist?.lowercased() ?? ""
+            return name.contains(searchCityText.lowercased())
         }
     }
     
