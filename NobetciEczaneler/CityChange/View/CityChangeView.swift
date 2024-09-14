@@ -33,24 +33,34 @@ struct CityChangeView: View {
     
     private var boxArea: some View {
         VStack {
-            searchBar
-            searchCityBar
+            if viewModel.provinceSelected != nil {
+                Group {
+                    searchBar
+                    searchCityBar
+                }
+                .transition(.opacity)
+            }
             HStack(alignment: .top, spacing: 16) {
                 province
                 district
             }
         }
+        .animation(.easeInOut, value: viewModel.provinceSelected)
     }
     
     private var searchBar: some View {
         TextField(LocalizableString.searchPharmarcies.rawValue.localized, text: $viewModel.searchText)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .keyboardToolbar()
+            .disabled(viewModel.state == .loading)
+            .opacity(viewModel.state == .loading ? 0.2 : 1.0)
     }
     
     private var searchCityBar: some View {
         TextField("Şehir Ara", text: $viewModel.searchCityText)
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            .disabled(viewModel.state == .loading)
+            .opacity(viewModel.state == .loading ? 0.2 : 1.0)
     }
     
     private var province: some View {
@@ -61,12 +71,14 @@ struct CityChangeView: View {
             selection: $viewModel.provinceSelected
         )
         .onChange(of: viewModel.provinceSelected) { newProvince in
-            if let province = newProvince {
-                let convertedProvince = viewModel.convertToEnglishCharacters(text: province)
-                Task {
-                    await viewModel.fetchDistricts(for: convertedProvince)
-                    viewModel.districtSelected = nil
-                    await viewModel.loadPharmacies(district: .empty, province: convertedProvince)
+            withAnimation {
+                if let province = newProvince {
+                    let convertedProvince = viewModel.convertToEnglishCharacters(text: province)
+                    Task {
+                        await viewModel.fetchDistricts(for: convertedProvince)
+                        viewModel.districtSelected = nil
+                        await viewModel.loadPharmacies(district: .empty, province: convertedProvince)
+                    }
                 }
             }
         }
@@ -99,18 +111,20 @@ struct CityChangeView: View {
                 .foregroundColor(.red)
                 .padding(.top, 150)
         case .loaded:
-            ScrollView {
-                ForEach(viewModel.filteredPharmacies, id: \.self) { pharmacy in
-                    PharmaciesCell(
-                        viewModel: PharmaciesCellViewModel(
-                            pharmacies: pharmacy.name.orEmptyString,
-                            city: pharmacy.dist.orEmptyString,
-                            phone: pharmacy.phone.orEmptyString,
-                            address: pharmacy.address.orEmptyString,
-                            location: pharmacy.loc.orEmptyString
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    ForEach(viewModel.filteredPharmacies, id: \.self) { pharmacy in
+                        PharmaciesCell(
+                            viewModel: PharmaciesCellViewModel(
+                                pharmacies: pharmacy.name.orEmptyString,
+                                city: pharmacy.dist.orEmptyString,
+                                phone: pharmacy.phone.orEmptyString,
+                                address: pharmacy.address.orEmptyString,
+                                location: pharmacy.loc.orEmptyString
+                            )
                         )
-                    )
-                    .padding(.horizontal, sizeClass == .compact ? 1 : 48)
+                        .padding(.horizontal, sizeClass == .compact ? 16 : 48)
+                    }
                 }
             }
         case .loadedDistricts(let districts):

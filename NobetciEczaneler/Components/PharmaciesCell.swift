@@ -27,7 +27,6 @@ struct PharmaciesCell: View {
             .background(Color.white)
             .clipShape(.rect(cornerRadius: 12))
             .shadow(radius: 10, x: 2, y: 10)
-            .padding(.horizontal)
             .onTapGesture {
                 guard viewModel.checkLocationAndPhoneText else { return }
                 withAnimation(.bouncy) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CityChangeState {
+enum CityChangeState: Equatable {
     case loading
     case error(String)
     case loaded([PharmacyModel])
